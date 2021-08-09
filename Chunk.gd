@@ -9,7 +9,7 @@ var chunkSize
 var shouldRemove = false
 var rng
 var Rock = preload("res://Assets/BigRock.tscn")
-var TreeLUL = preload("res://Assets/Tree.tscn")
+var TreeLarge = preload("res://Assets/Tree.tscn")
 
 func _init(noise, x, z, chunkSize):
 	self.noise = noise
@@ -49,7 +49,7 @@ func generateChunk():
 			add_child(rock)
 			rock.translation = vertex
 		if rand == 10:
-			var tree = TreeLUL.instance()
+			var tree = TreeLarge.instance()
 			add_child(tree)
 			tree.translation = vertex
 		
