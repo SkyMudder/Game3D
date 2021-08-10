@@ -131,7 +131,7 @@ func switchItem(_a):
 			previousItem = null
 			return
 		currentItem = model.instance()
-		add_child(currentItem)
+		$Rotation_Helper/Camera.add_child(currentItem)
 		currentItem.translation = Vector3(0.2, -0.5, -0.3)
 		previousItem = currentItem
 		currentItem = null
