@@ -1,8 +1,8 @@
 [gd_scene load_steps=13 format=2]
 
-[ext_resource path="res://Assets/Leaf3.material" type="Material" id=1]
-[ext_resource path="res://Assets/Leaf1.material" type="Material" id=2]
-[ext_resource path="res://Assets/Leaf2.material" type="Material" id=3]
+[ext_resource path="res://Assets/OakLeaf3.material" type="Material" id=1]
+[ext_resource path="res://Assets/OakLeaf1.material" type="Material" id=2]
+[ext_resource path="res://Assets/OakLeaf2.material" type="Material" id=3]
 [ext_resource path="res://Assets/Wood.material" type="Material" id=4]
 
 [sub_resource type="ArrayMesh" id=1]

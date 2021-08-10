@@ -9,7 +9,7 @@ onready var player = get_node("/root/World/Player")
 
 onready var textureRect = get_node("TextureRect")
 onready var itemAmount = get_node("TextureRect/ItemAmount")
-onready var emptySlotTexture = preload("res://Items/EmptyInventorySlot.png")
+onready var emptySlotTexture = preload("res://UIElements/EmptyInventorySlot.png")
 onready var selected = get_node("Selected")
 onready var furnaceView = get_parent().get_parent().get_parent()
 

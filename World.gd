@@ -46,7 +46,9 @@ func getChunk(x, z):
 	
 func updateChunks():
 	var playerPosition = $Player.translation
+# warning-ignore:integer_division
 	var playerX = int(playerPosition.x) / chunkSize
+# warning-ignore:integer_division
 	var playerZ = int(playerPosition.z) / chunkSize
 	
 	for x in range(playerX - chunkAmount * 0.5, playerX + chunkAmount * 0.5):

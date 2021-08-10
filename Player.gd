@@ -80,10 +80,19 @@ func process_input(_delta):
 			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 		else:
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+		# ----------------------------------
+		# Capturing/Freeing the cursor
 		if $InventoryCenterContainer.visible:
 			$InventoryCenterContainer.visible = false
 		else:
 			$InventoryCenterContainer.visible = true
+		# ----------------------------------
+	# ----------------------------------
+	
+	# ----------------------------------
+	# Attacking
+	if Input.is_action_just_pressed("mouse_left"):
+		previousItem.playAnimation()
 	# ----------------------------------
 	
 func process_movement(delta):
@@ -132,7 +141,6 @@ func switchItem(_a):
 			return
 		currentItem = model.instance()
 		$Rotation_Helper/Camera.add_child(currentItem)
-		currentItem.translation = Vector3(0.2, -0.5, -0.3)
 		previousItem = currentItem
 		currentItem = null
 		return

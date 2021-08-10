@@ -25,7 +25,7 @@ func _ready():
 	inventory.connect("items_changed", self, "_on_items_changed")
 	for x in get_children():
 		x.connect("slot_updated", self, "_on_slot_updated")
-	for x in range(30):
+	for _x in range(30):
 		inventory.add(preload("res://Items/Wood.tres"))
 	inventory.add(preload("res://Items/Pickaxe.tres"))
 	inventory.add(preload("res://Items/Axe.tres"))
