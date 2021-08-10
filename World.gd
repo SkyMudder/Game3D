@@ -15,7 +15,7 @@ func _process(_delta):
 func _ready():
 	noise = OpenSimplexNoise.new()
 	noise.seed = 0
-	noise.period = 150
+	noise.period = 120
 	
 func addChunk(x, z):
 	var key : String = str(x) + "," + str(z)

@@ -5,17 +5,17 @@ var meshInstance
 var noise
 var x
 var z
-var chunkSize
+var size
 var shouldRemove = false
 var rng
-var Rock = preload("res://Assets/BigRock.tscn")
-var TreeLarge = preload("res://Assets/Tree.tscn")
+var Rock = preload("res://Assets/RockLarge.tscn")
+var TreeLarge = preload("res://Assets/TreeOak.tscn")
 
-func _init(noise, x, z, chunkSize):
-	self.noise = noise
-	self.x = x
-	self.z = z
-	self.chunkSize = chunkSize
+func _init(terrainNoise, chunkX, chunkZ, chunkSize):
+	self.noise = terrainNoise
+	self.x = chunkX
+	self.z = chunkZ
+	self.size = chunkSize
 	rng = RandomNumberGenerator.new()
 	rng.randomize()
 	
@@ -24,11 +24,12 @@ func _ready():
 	
 func generateChunk():
 	var planeMesh = PlaneMesh.new()
-	planeMesh.size = Vector2(chunkSize, chunkSize)
-	planeMesh.subdivide_depth = chunkSize * 0.3
-	planeMesh.subdivide_width = chunkSize * 0.3
+	planeMesh.size = Vector2(size, size)
+	planeMesh.subdivide_depth = size * 0.3
+	planeMesh.subdivide_width = size * 0.3
 	
-	#TODO Give the Mesh a Material
+	planeMesh.material = preload("res://Assets/Terrain_Grass.tres")
+	
 	var surfaceTool = SurfaceTool.new()
 	var meshDataTool = MeshDataTool.new()
 	surfaceTool.create_from(planeMesh, 0)
