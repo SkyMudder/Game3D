@@ -1,0 +1,15 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://Items/Item.gd" type="Script" id=1]
+[ext_resource path="res://Items/Wood.png" type="Texture" id=2]
+
+[resource]
+script = ExtResource( 1 )
+name = "Wood"
+texture = ExtResource( 2 )
+amount = 1
+stackLimit = 50
+damageMultiplier = 0.0
+damageType = -1
+craftingType = 0
+model = -1

@@ -1,5 +1,11 @@
 extends KinematicBody
 
+
+onready var toolbar = get_node("ToolbarCenterContainer/InventoryDisplay")
+
+var playerItem
+var currentItem
+var previousItem
 const GRAVITY = -24.8
 var vel = Vector3()
 var MAX_SPEED = 10
@@ -17,6 +23,7 @@ var rotation_helper
 var MOUSE_SENSITIVITY = 0.05
 
 func _ready():
+	toolbar.connect("item_switched", self, "switchItem")
 	camera = $Rotation_Helper/Camera
 	rotation_helper = $Rotation_Helper
 
@@ -110,3 +117,25 @@ func _input(event):
 		var camera_rot = rotation_helper.rotation_degrees
 		camera_rot.x = clamp(camera_rot.x, -70, 70)
 		rotation_helper.rotation_degrees = camera_rot
+	
+func switchItem(_a):
+	if previousItem != null:
+		previousItem.queue_free()
+	if playerItem != null:
+		var model
+		if playerItem.model == 0:
+			model = preload("res://Items/IronHandAxe.tscn")
+		elif playerItem.model == 1:
+			model = preload("res://Items/IronPickaxe.tscn")
+		else:
+			previousItem = null
+			return
+		currentItem = model.instance()
+		add_child(currentItem)
+		currentItem.translation = Vector3(0.2, -0.5, -0.3)
+		previousItem = currentItem
+		currentItem = null
+		return
+	else:
+		previousItem = null
+	previousItem = currentItem

@@ -28,7 +28,7 @@ func generateChunk():
 	planeMesh.subdivide_depth = size * 0.3
 	planeMesh.subdivide_width = size * 0.3
 	
-	planeMesh.material = preload("res://Assets/Terrain_Grass.tres")
+	planeMesh.material = preload("res://Assets/Terrain.tres")
 	
 	var surfaceTool = SurfaceTool.new()
 	var meshDataTool = MeshDataTool.new()

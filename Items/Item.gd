@@ -8,3 +8,4 @@ export(int) var stackLimit
 export(float) var damageMultiplier
 export(int) var damageType
 export(int) var craftingType
+export(int) var model

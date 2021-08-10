@@ -1,0 +1,15 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://Items/Item.gd" type="Script" id=1]
+[ext_resource path="res://Items/Axe.png" type="Texture" id=2]
+
+[resource]
+script = ExtResource( 1 )
+name = "Axe"
+texture = ExtResource( 2 )
+amount = 1
+stackLimit = 1
+damageMultiplier = 1.25
+damageType = 0
+craftingType = 1
+model = 0

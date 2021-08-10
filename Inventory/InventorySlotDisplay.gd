@@ -5,6 +5,7 @@ signal slot_updated(index)
 
 onready var playerInventories : Array = Inventories.playerInventories
 var inventory : Inventory
+onready var player = get_node("/root/World/Player")
 
 onready var textureRect = get_node("TextureRect")
 onready var itemAmount = get_node("TextureRect/ItemAmount")
@@ -153,7 +154,14 @@ func drop_data(_position, data) -> void:
 	
 """Handle Item Selection"""
 func select() -> void:
-	pass
+	# Mark the Slot as selected
+	selected.show()
+	# If the Slot contains an Item, set it on the Player
+	if inventory.items[get_index()] != null:
+		player.playerItem = inventory.items[get_index()]
+	else:
+		player.playerItem = null
+	get_parent().emit_signal("item_switched", 0)
 	
 """Deselect a Slot"""
 func deselect() -> void:
