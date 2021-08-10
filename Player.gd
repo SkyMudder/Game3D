@@ -7,7 +7,6 @@ const JUMP_SPEED = 18
 const ACCEL = 4.5
 
 var dir = Vector3()
-var brr = false
 
 const DEACCEL= 16
 const MAX_SLOPE_ANGLE = 40
@@ -72,8 +71,7 @@ func process_movement(delta):
 	dir.y = 0
 	dir = dir.normalized()
 
-	if brr:
-		vel.y += delta * GRAVITY
+	vel.y += delta * GRAVITY
 
 	var hvel = vel
 	hvel.y = 0

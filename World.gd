@@ -6,12 +6,8 @@ const chunkAmount : int = 16
 
 var noise : OpenSimplexNoise
 var chunks = {}
-var unreadyChunks = {}
-var count = 0
 
 func _process(_delta):
-	if count > 127:
-		$Player.brr = true
 	updateChunks()
 	cleanUpChunks()
 	resetChunks()
@@ -24,16 +20,12 @@ func _ready():
 func addChunk(x, z):
 	var key : String = str(x) + "," + str(z)
 	
-	noise.octaves = 4
-	if chunks.has(key) or unreadyChunks.has(key):
+	if chunks.has(key):
 		return
 	
 	loadChunk(x, z)
-	unreadyChunks[key] = 1
 	
 func loadChunk(x, z):
-	count += 1
-	
 	var chunk : Chunk = Chunk.new(noise, x * chunkSize, z * chunkSize, chunkSize)
 	chunk.translation = Vector3(x * chunkSize, 0, z * chunkSize)
 	
@@ -43,7 +35,6 @@ func loadDone(chunk):
 	add_child(chunk)
 	var key : String = str(chunk.x / chunkSize) + "," + str(chunk.z / chunkSize)
 	chunks[key] = chunk
-	unreadyChunks.erase(key)
 	
 func getChunk(x, z):
 	var key : String = str(x) + "," + str(z)
@@ -55,11 +46,11 @@ func getChunk(x, z):
 	
 func updateChunks():
 	var playerPosition = $Player.translation
-	var playerX = float(playerPosition.x) / chunkSize
-	var playerZ = float(playerPosition.z) / chunkSize
+	var playerX = int(playerPosition.x) / chunkSize
+	var playerZ = int(playerPosition.z) / chunkSize
 	
 	for x in range(playerX - chunkAmount * 0.5, playerX + chunkAmount * 0.5):
-		for z in range(playerZ - chunkAmount * 0.5, playerX + chunkAmount * 0.5):
+		for z in range(playerZ - chunkAmount * 0.5, playerZ + chunkAmount * 0.5):
 			addChunk(x, z)
 			var chunk = getChunk(x, z)
 			if chunk != null:
