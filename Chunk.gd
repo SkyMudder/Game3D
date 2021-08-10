@@ -34,7 +34,7 @@ func generateChunk():
 	var meshDataTool = MeshDataTool.new()
 	surfaceTool.create_from(planeMesh, 0)
 	var arrayPlane = surfaceTool.commit()
-	var error = meshDataTool.create_from_surface(arrayPlane, 0)
+	var _error = meshDataTool.create_from_surface(arrayPlane, 0)
 	
 	for i in range(meshDataTool.get_vertex_count()):
 		var vertex = meshDataTool.get_vertex(i)
