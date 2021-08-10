@@ -154,6 +154,11 @@ ctrl={
  ]
 }
 
+[layer_names]
+
+3d_physics/layer_1="Movement"
+3d_physics/layer_2="Tools"
+
 [physics]
 
 common/enable_pause_aware_picking=true

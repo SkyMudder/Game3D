@@ -1,9 +1,10 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Assets/OakLeaf3.material" type="Material" id=1]
 [ext_resource path="res://Assets/OakLeaf1.material" type="Material" id=2]
 [ext_resource path="res://Assets/OakLeaf2.material" type="Material" id=3]
 [ext_resource path="res://Assets/Wood.material" type="Material" id=4]
+[ext_resource path="res://Assets/TreeOak.gd" type="Script" id=5]
 
 [sub_resource type="ArrayMesh" id=1]
 resource_name = "Icosphere.004"
@@ -108,6 +109,7 @@ height = 3.27713
 
 [node name="StaticBody" type="StaticBody"]
 transform = Transform( 1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 0, -1.07128, 0 )
+script = ExtResource( 5 )
 
 [node name="Icosphere004" type="MeshInstance" parent="."]
 transform = Transform( 0.48836, 0.675242, 0.121668, 0.284737, -0.29869, 0.524158, -0.828421, 0.295397, 0.251883, -0.885313, 3.78179, 1.07802 )

@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Assets/Wood.material" type="Material" id=1]
 [ext_resource path="res://Assets/Iron.material" type="Material" id=2]
 [ext_resource path="res://Assets/WoodLight.material" type="Material" id=3]
 [ext_resource path="res://Items/IronPickaxe.gd" type="Script" id=4]
+[ext_resource path="res://HitHurtBoxes/Hitbox.tscn" type="PackedScene" id=5]
 
 [sub_resource type="ArrayMesh" id=1]
 resource_name = "Cube.003"
@@ -83,6 +84,8 @@ tracks/1/keys = {
 "values": [ Vector3( 0, 90, 60 ), Vector3( 0, 70, 10 ), Vector3( 0, 90, 60 ) ]
 }
 
+[sub_resource type="CapsuleShape" id=6]
+
 [node name="IronPickaxe" type="Spatial"]
 transform = Transform( -2.18557e-08, 3.78552e-08, 1, 0.866025, 0.5, 0, -0.5, 0.866025, -4.37114e-08, 0.2, -0.5, -0.3 )
 script = ExtResource( 4 )
@@ -106,3 +109,12 @@ material/0 = null
 autoplay = "Idle"
 anims/Idle = SubResource( 4 )
 anims/Slash = SubResource( 5 )
+
+[node name="Hitbox" parent="." instance=ExtResource( 5 )]
+transform = Transform( -0.088232, -0.0447685, -0.0290447, 0.0131107, 0.00625548, -0.197879, 0.0452021, -0.0892001, 0.000700224, 0.596902, 0.10727, 0.186262 )
+collision_mask = 2
+
+[node name="CollisionShape" parent="Hitbox" index="0"]
+shape = SubResource( 6 )
+
+[editable path="Hitbox"]

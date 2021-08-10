@@ -8,7 +8,7 @@ var currentItem
 var previousItem
 const GRAVITY = -24.8
 var vel = Vector3()
-var MAX_SPEED = 10
+var MAX_SPEED = 8
 const JUMP_SPEED = 10
 const ACCEL = 4.5
 
@@ -68,9 +68,9 @@ func process_input(_delta):
 	# ----------------------------------
 	# Sprinting
 	if Input.is_action_pressed("movement_sprint"):
-		MAX_SPEED = 18
+		MAX_SPEED = 12
 	else:
-		MAX_SPEED = 10
+		MAX_SPEED = 8
 	# ----------------------------------
 	
 	# ----------------------------------

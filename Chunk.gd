@@ -9,7 +9,9 @@ var size
 var shouldRemove = false
 var rng
 var Rock = preload("res://Assets/RockLarge.tscn")
-var TreeLarge = preload("res://Assets/TreeOak.tscn")
+var TreeOak = preload("res://Assets/TreeOak.tscn")
+var TreeFir = preload("res://Assets/TreeFir.tscn")
+var Grass = preload("res://Assets/Grass.tscn")
 
 func _init(terrainNoise, chunkX, chunkZ, chunkSize):
 	self.noise = terrainNoise
@@ -43,17 +45,23 @@ func generateChunk():
 		vertex.y = noise.get_noise_3d(vertex.x + x, vertex.y, vertex.z + z) * 30
 
 		meshDataTool.set_vertex(i, vertex)
-		var rand = rng.randi_range(0, 100)
-		if rand == 5:
+		var rand = rng.randi_range(0, 300)
+		
+		if rand == 1:
 			var rock = Rock.instance()
 			add_child(rock)
 			rock.translation = vertex
 			rock.rotation_degrees = Vector3(rng.randf_range(0, 30), rng.randf_range(0, 90), 0)
-		if rand == 10:
-			var tree = TreeLarge.instance()
-			add_child(tree)
-			tree.translation = vertex
-			tree.rotation_degrees.y = rng.randf_range(0, 360)
+		if rand == 2:
+			var treeOak = TreeOak.instance()
+			add_child(treeOak)
+			treeOak.translation = vertex
+			treeOak.rotation_degrees.y = rng.randf_range(0, 360)
+		if rand == 3:
+			var treeFir = TreeFir.instance()
+			add_child(treeFir)
+			treeFir.translation = Vector3(vertex.x, vertex.y + 3, vertex.z)
+			treeFir.rotation_degrees.y = rng.randf_range(0, 360)
 		
 	for y in range(arrayPlane.get_surface_count()):
 		arrayPlane.surface_remove(y)
