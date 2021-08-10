@@ -111,10 +111,10 @@ anims/Idle = SubResource( 4 )
 anims/Slash = SubResource( 5 )
 
 [node name="Hitbox" parent="." instance=ExtResource( 5 )]
-transform = Transform( -0.088232, -0.0447685, -0.0290447, 0.0131107, 0.00625548, -0.197879, 0.0452021, -0.0892001, 0.000700224, 0.596902, 0.10727, 0.186262 )
-collision_mask = 2
+transform = Transform( -0.088232, -0.0447685, -0.0290447, 0.0131107, 0.00625548, -0.197879, 0.0452021, -0.0892001, 0.000700224, 0.548762, -0.177834, 0.186262 )
 
 [node name="CollisionShape" parent="Hitbox" index="0"]
 shape = SubResource( 6 )
+disabled = true
 
 [editable path="Hitbox"]
