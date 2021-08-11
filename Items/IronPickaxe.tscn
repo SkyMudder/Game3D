@@ -1,10 +1,10 @@
 [gd_scene load_steps=12 format=2]
 
-[ext_resource path="res://Assets/Wood.material" type="Material" id=1]
-[ext_resource path="res://Assets/Iron.material" type="Material" id=2]
-[ext_resource path="res://Assets/WoodLight.material" type="Material" id=3]
-[ext_resource path="res://Items/IronPickaxe.gd" type="Script" id=4]
-[ext_resource path="res://HitHurtBoxes/Hitbox.tscn" type="PackedScene" id=5]
+[ext_resource path="res://HitHurtBoxes/Hitbox.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Items/PickAxe.gd" type="Script" id=2]
+[ext_resource path="res://Assets/Iron.material" type="Material" id=3]
+[ext_resource path="res://Assets/WoodLight.material" type="Material" id=4]
+[ext_resource path="res://Assets/Wood.material" type="Material" id=5]
 
 [sub_resource type="ArrayMesh" id=1]
 resource_name = "Cube.003"
@@ -15,7 +15,7 @@ surfaces/0 = {
 "blend_shape_data": [  ],
 "format": 97559,
 "index_count": 972,
-"material": ExtResource( 2 ),
+"material": ExtResource( 3 ),
 "name": "Iron.004",
 "primitive": 4,
 "skeleton_aabb": [  ],
@@ -31,7 +31,7 @@ surfaces/0 = {
 "blend_shape_data": [  ],
 "format": 97559,
 "index_count": 384,
-"material": ExtResource( 1 ),
+"material": ExtResource( 5 ),
 "name": "Material.001",
 "primitive": 4,
 "skeleton_aabb": [  ],
@@ -46,7 +46,7 @@ surfaces/0 = {
 "blend_shape_data": [  ],
 "format": 97559,
 "index_count": 468,
-"material": ExtResource( 3 ),
+"material": ExtResource( 4 ),
 "name": "WoodLight.002",
 "primitive": 4,
 "skeleton_aabb": [  ],
@@ -89,7 +89,7 @@ extents = Vector3( 0.557575, 0.378036, 0.767035 )
 
 [node name="IronPickaxe" type="Spatial"]
 transform = Transform( -2.18557e-08, 3.78552e-08, 1, 0.866025, 0.5, 0, -0.5, 0.866025, -4.37114e-08, 0.2, -0.5, -0.3 )
-script = ExtResource( 4 )
+script = ExtResource( 2 )
 
 [node name="Cube" type="MeshInstance" parent="."]
 transform = Transform( -0.0404593, -0.00384302, -5.16343e-10, 0.00384302, -0.0404593, 2.44674e-11, 5.16343e-10, 2.44672e-11, -0.0406414, 0.572192, 0.0353237, 0.169369 )
@@ -102,7 +102,7 @@ mesh = SubResource( 2 )
 material/0 = null
 
 [node name="Cube001" type="MeshInstance" parent="."]
-transform = Transform( 0.0871342, 0, 0, -3.72529e-09, 0.0313017, 0, 0, 0, 0.0218139, 0.325148, 0.0600541, 0.169247 )
+transform = Transform( 0.0871342, 0, 0, -3.72529e-09, 0.0313017, 0, -4.44089e-16, 0, 0.0218139, 0.325148, 0.0600542, 0.169247 )
 mesh = SubResource( 3 )
 material/0 = null
 
@@ -111,7 +111,7 @@ autoplay = "Idle"
 anims/Idle = SubResource( 4 )
 anims/Slash = SubResource( 5 )
 
-[node name="Hitbox" parent="." instance=ExtResource( 5 )]
+[node name="Hitbox" parent="." instance=ExtResource( 1 )]
 transform = Transform( 0.1, -2.98023e-08, 0, 7.45058e-09, 0.6, 1.33227e-15, 0, -5.32907e-15, 0.1, 0.593284, 0.0460551, 0.18134 )
 
 [node name="CollisionShape" parent="Hitbox" index="0"]

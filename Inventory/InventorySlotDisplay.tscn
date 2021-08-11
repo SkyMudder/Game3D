@@ -17,11 +17,12 @@ __meta__ = {
 }
 
 [node name="TextureRect" type="TextureRect" parent="."]
-margin_left = 462.0
-margin_top = 252.0
-margin_right = 558.0
-margin_bottom = 348.0
+margin_left = 410.0
+margin_top = 200.0
+margin_right = 610.0
+margin_bottom = 400.0
 rect_min_size = Vector2( 96, 96 )
+rect_pivot_offset = Vector2( 0.48, 0.48 )
 texture = ExtResource( 1 )
 stretch_mode = 6
 __meta__ = {

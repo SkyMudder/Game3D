@@ -1,12 +1,19 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Player.gd" type="Script" id=1]
 [ext_resource path="res://Inventory/InventoryDisplay.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Inventory/ToolbarDisplay.gd" type="Script" id=3]
+[ext_resource path="res://TargetHealth.gd" type="Script" id=4]
 
 [sub_resource type="CapsuleShape" id=1]
 radius = 0.684425
 height = 0.801089
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0.662745, 0.290196, 0.290196, 1 )
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0.533333, 0.780392, 0.309804, 1 )
 
 [node name="Player" type="KinematicBody"]
 script = ExtResource( 1 )
@@ -68,3 +75,23 @@ margin_top = 107.0
 margin_right = 401.0
 margin_bottom = 107.0
 script = ExtResource( 3 )
+
+[node name="TargetHealth" type="ProgressBar" parent="."]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.85
+anchor_right = 0.5
+anchor_bottom = 0.86
+margin_left = -251.0
+margin_top = -46.2247
+margin_right = 359.0
+margin_bottom = -11.2247
+custom_styles/fg = SubResource( 2 )
+custom_styles/bg = SubResource( 3 )
+max_value = 1000.0
+value = 1000.0
+percent_visible = false
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}

@@ -17,7 +17,6 @@ func _ready():
 	timer.connect("timeout", self, "_on_timer_timeout")
 	
 func _on_Hurtbox_area_entered(_area):
-	print(hp)
 	takeDamage(self)
 	if timer.time_left == 0:
 		timer.start()

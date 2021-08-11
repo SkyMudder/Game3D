@@ -50,19 +50,19 @@ func generateChunk():
 		
 		if rand == 1:
 			var rock = Rock.instance()
-			add_child(rock)
 			rock.translation = vertex
 			rock.rotation_degrees = Vector3(rng.randf_range(0, 30), rng.randf_range(0, 90), 0)
+			add_child(rock)
 		if rand == 2:
 			var treeOak = TreeOak.instance()
-			add_child(treeOak)
 			treeOak.translation = vertex
 			treeOak.rotation_degrees.y = rng.randf_range(0, 360)
+			add_child(treeOak)
 		if rand == 3:
 			var treeFir = TreeFir.instance()
-			add_child(treeFir)
 			treeFir.translation = Vector3(vertex.x, vertex.y + 3, vertex.z)
 			treeFir.rotation_degrees.y = rng.randf_range(0, 360)
+			add_child(treeFir)
 		
 	for y in range(arrayPlane.get_surface_count()):
 		arrayPlane.surface_remove(y)

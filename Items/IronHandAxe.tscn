@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Assets/Wood.material" type="Material" id=1]
 [ext_resource path="res://Assets/WoodLight.material" type="Material" id=2]
-[ext_resource path="res://Items/IronHandAxe.gd" type="Script" id=3]
+[ext_resource path="res://Items/HandAxe.gd" type="Script" id=3]
 [ext_resource path="res://HitHurtBoxes/Hitbox.tscn" type="PackedScene" id=4]
 
 [sub_resource type="ArrayMesh" id=1]
