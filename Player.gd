@@ -91,7 +91,7 @@ func process_input(_delta):
 	
 	# ----------------------------------
 	# Attacking
-	if Input.is_action_just_pressed("mouse_left"):
+	if Input.is_action_just_pressed("mouse_left") and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 		if playerItem != null:
 			if playerItem.damageType != -1:
 				previousItem.playAnimation()
