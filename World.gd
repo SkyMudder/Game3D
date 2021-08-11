@@ -63,7 +63,8 @@ func cleanUpChunks() -> void:
 		var chunk = chunks[key]
 		if chunk.shouldRemove:
 			chunk.queue_free()
-			var error = chunks.erase(key)
+	# warning-ignore:return_value_discarded
+			chunks.erase(key)
 	
 func resetChunks() -> void:
 	for key in chunks:
