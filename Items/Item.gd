@@ -7,5 +7,5 @@ export(int) var amount = 1
 export(int) var stackLimit
 export(float) var damageMultiplier
 export(int) var damageType
-export(int) var craftingType
+export(int) var level
 export(int) var model

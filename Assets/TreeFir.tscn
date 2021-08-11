@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Assets/FirWood.material" type="Material" id=1]
 [ext_resource path="res://Assets/FirLeaves1.material" type="Material" id=2]
 [ext_resource path="res://Assets/FirLeaves3.material" type="Material" id=3]
 [ext_resource path="res://Assets/FirLeaves2.material" type="Material" id=4]
 [ext_resource path="res://Assets/TreeFir.gd" type="Script" id=5]
+[ext_resource path="res://HitHurtBoxes/Hurtbox.tscn" type="PackedScene" id=6]
 
 [sub_resource type="ArrayMesh" id=1]
 resource_name = "Cone.002"
@@ -77,6 +78,8 @@ height = 2.48324
 radius = 5.07725
 height = 0.002
 
+[sub_resource type="BoxShape" id=7]
+
 [node name="StaticBody" type="StaticBody"]
 script = ExtResource( 5 )
 
@@ -111,3 +114,14 @@ shape = SubResource( 6 )
 [node name="CollisionShape3" type="CollisionShape" parent="."]
 transform = Transform( 0.2, -4.36558e-11, 0, 2.91038e-11, 0.3, 0, 0, 0, 0.2, 0.127861, 3.44253, 0 )
 shape = SubResource( 6 )
+
+[node name="Hurtbox" parent="." instance=ExtResource( 6 )]
+transform = Transform( 1.5, 0, 0, 0, 4, 0, 0, 0, 1.5, 0, 0.854622, 0 )
+collision_mask = 2
+
+[node name="CollisionShape" parent="Hurtbox" index="0"]
+shape = SubResource( 7 )
+
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
+
+[editable path="Hurtbox"]

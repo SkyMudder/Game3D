@@ -11,5 +11,5 @@ amount = 1
 stackLimit = 50
 damageMultiplier = 0.0
 damageType = -1
-craftingType = 0
+level = 0
 model = -1

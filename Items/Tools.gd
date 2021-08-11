@@ -3,6 +3,9 @@ extends Node
 
 func playAnimation():
 	$Hitbox.get_child(0).set_disabled(false)
+	print("ACTIVE")
 	$AnimationPlayer.play("Slash")
-	yield(get_tree().create_timer(0.3), "timeout")
+	
+func deactivateCollision():
 	$Hitbox.get_child(0).set_disabled(true)
+	print("NOT ACTIVE")

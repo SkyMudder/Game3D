@@ -8,6 +8,7 @@ var z
 var size
 var shouldRemove = false
 var rng
+
 var Rock = preload("res://Assets/RockLarge.tscn")
 var TreeOak = preload("res://Assets/TreeOak.tscn")
 var TreeFir = preload("res://Assets/TreeFir.tscn")

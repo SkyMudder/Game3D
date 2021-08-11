@@ -1,10 +1,11 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Assets/OakLeaf3.material" type="Material" id=1]
 [ext_resource path="res://Assets/OakLeaf1.material" type="Material" id=2]
 [ext_resource path="res://Assets/OakLeaf2.material" type="Material" id=3]
 [ext_resource path="res://Assets/Wood.material" type="Material" id=4]
 [ext_resource path="res://Assets/TreeOak.gd" type="Script" id=5]
+[ext_resource path="res://HitHurtBoxes/Hurtbox.tscn" type="PackedScene" id=6]
 
 [sub_resource type="ArrayMesh" id=1]
 resource_name = "Icosphere.004"
@@ -107,6 +108,8 @@ height = 3.27713
 
 [sub_resource type="SphereShape" id=8]
 
+[sub_resource type="BoxShape" id=9]
+
 [node name="StaticBody" type="StaticBody"]
 transform = Transform( 1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 0, -1.07128, 0 )
 script = ExtResource( 5 )
@@ -164,3 +167,14 @@ shape = SubResource( 8 )
 [node name="Leaves5" type="CollisionShape" parent="."]
 transform = Transform( 0.211396, -0.014328, -0.977109, 0.112249, 0.596208, -1.45328e-09, 0.970933, -0.0658079, 0.21274, -0.887515, 3.84673, 1.29699 )
 shape = SubResource( 8 )
+
+[node name="Hurtbox" parent="." instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 4, 0, 0, 0, 1, -0.439572, 3.04124, 0.611198 )
+collision_mask = 2
+
+[node name="CollisionShape" parent="Hurtbox" index="0"]
+shape = SubResource( 9 )
+
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
+
+[editable path="Hurtbox"]
