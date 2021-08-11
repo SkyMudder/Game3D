@@ -1,18 +1,18 @@
 extends Spatial
 class_name Chunk
 
-var meshInstance
-var noise
-var x
-var z
-var size
-var shouldRemove = false
-var rng
+var meshInstance : MeshInstance
+var noise : OpenSimplexNoise
+var x : float
+var z : float
+var size : int
+var shouldRemove : bool = false
+var rng : RandomNumberGenerator
 
-var Rock = preload("res://Assets/RockLarge.tscn")
-var TreeOak = preload("res://Assets/TreeOak.tscn")
-var TreeFir = preload("res://Assets/TreeFir.tscn")
-var Grass = preload("res://Assets/Grass.tscn")
+var Rock : PackedScene = preload("res://Assets/RockLarge.tscn")
+var TreeOak : PackedScene = preload("res://Assets/TreeOak.tscn")
+var TreeFir : PackedScene = preload("res://Assets/TreeFir.tscn")
+var Grass : PackedScene = preload("res://Assets/Grass.tscn")
 
 func _init(terrainNoise, chunkX, chunkZ, chunkSize):
 	self.noise = terrainNoise
@@ -25,7 +25,8 @@ func _init(terrainNoise, chunkX, chunkZ, chunkSize):
 func _ready():
 	generateChunk()
 	
-func generateChunk():
+"""Create a Chunk. Form the Terrain and add Objects on top of it"""
+func generateChunk() -> void:
 	var planeMesh = PlaneMesh.new()
 	planeMesh.size = Vector2(size, size)
 	planeMesh.subdivide_depth = size * 0.3

@@ -1,12 +1,13 @@
 extends Node
 
 
-onready var HealthBar = preload("res://UIElements/HealthBar3D.tscn")
 onready var player = get_node("/root/World/Player")
 onready var playerTargetHealth = get_node("/root/World/Player/TargetHealth")
 onready var toolbar = get_node("/root/World/Player/ToolbarCenterContainer/InventoryDisplay")
 
-func takeDamage(object):
+"""Reduce the Objects HP if hit with an appropriate Tool/Item
+Update HP on the UI"""
+func takeDamage(object) -> void:
 	if !object.recentlyDamaged and player.playerItem != null:
 		if checkItemCompatible(object, player.playerItem.damageType, player.playerItem.level):
 			object.recentlyDamaged = true
@@ -19,12 +20,8 @@ func takeDamage(object):
 			playerTargetHealth.hide()
 			object.queue_free()
 	
+"""Check if an Item is compatible with the Farmable Object"""
 func checkItemCompatible(object, damageType, level) -> bool:
 	var a = object.damageType == damageType
 	var b = object.level == level
 	return a and b
-	
-	
-func create3DProgressBar():
-	var healthBar = HealthBar.instance()
-	return healthBar

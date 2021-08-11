@@ -3,24 +3,24 @@ extends KinematicBody
 
 onready var toolbar = get_node("ToolbarCenterContainer/InventoryDisplay")
 
-var playerItem
-var currentItem
-var previousItem
-const GRAVITY = -24.8
-var vel = Vector3()
-var MAX_SPEED = 8
-const JUMP_SPEED = 10
-const ACCEL = 4.5
+var playerItem : Item # The Item the Player has equipped
+var currentItem : Spatial # The 3D Model of the Item
+var previousItem : Spatial # The 3D Model of the previous Item
+const GRAVITY : float = -24.8
+var vel : Vector3 = Vector3()
+var MAX_SPEED : float = 8.0
+const JUMP_SPEED : float = 10.0
+const ACCEL : float = 4.5
 
-var dir = Vector3()
+var dir : Vector3 = Vector3()
 
 const DEACCEL= 16
 const MAX_SLOPE_ANGLE = 40
 
-var camera
-var rotation_helper
+var camera : Camera
+var rotation_helper : Spatial
 
-var MOUSE_SENSITIVITY = 0.05
+var MOUSE_SENSITIVITY : float = 0.05
 
 func _ready():
 	toolbar.connect("item_switched", self, "switchItem")
@@ -68,9 +68,9 @@ func process_input(_delta):
 	# ----------------------------------
 	# Sprinting
 	if Input.is_action_pressed("movement_sprint"):
-		MAX_SPEED = 12
+		MAX_SPEED = 12.0
 	else:
-		MAX_SPEED = 8
+		MAX_SPEED = 8.0
 	# ----------------------------------
 	
 	# ----------------------------------
@@ -129,7 +129,8 @@ func _input(event):
 		camera_rot.x = clamp(camera_rot.x, -70, 70)
 		rotation_helper.rotation_degrees = camera_rot
 	
-func switchItem(_a):
+"""Switch the Item in the Player's hand"""
+func switchItem() -> void:
 	if previousItem != null:
 		previousItem.queue_free()
 	if playerItem != null:

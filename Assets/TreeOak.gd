@@ -2,12 +2,12 @@ extends "res://Assets/FarmableObjects.gd"
 
 
 var timer : Timer
-var hp = 1000
-var level = 0
+var hp : int = 1000
+var level : int = 0
 var recentlyDamaged = false
 var damageType = Types.resourceType.WOOD
-var resource = preload("res://Items/Wood.tres")
-var amount = 6
+var resource : Resource = preload("res://Items/Wood.tres")
+var amount : int = 6
 
 func _ready():
 	$Hurtbox/CollisionShape.set_disabled(true)

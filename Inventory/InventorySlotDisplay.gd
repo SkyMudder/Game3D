@@ -161,7 +161,7 @@ func select() -> void:
 		player.playerItem = inventory.items[get_index()]
 	else:
 		player.playerItem = null
-	get_parent().emit_signal("item_switched", 0)
+	get_parent().emit_signal("item_switched")
 	
 """Deselect a Slot"""
 func deselect() -> void:
