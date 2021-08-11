@@ -6,7 +6,7 @@ var timer : Timer
 func _ready():
 	timer = Timer.new()
 	add_child(timer)
-	timer.connect("timeout", self, "_on_timer_timeout")
+	var error = timer.connect("timeout", self, "_on_timer_timeout")
 	
 func showAndReset() -> void:
 	visible = true

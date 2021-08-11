@@ -8,4 +8,4 @@ export(int) var stackLimit
 export(float) var damageMultiplier
 export(int) var damageType
 export(int) var level
-export(int) var model
+export(String) var model

@@ -12,4 +12,4 @@ stackLimit = 50
 damageMultiplier = 0.0
 damageType = -1
 level = 0
-model = -1
+model = ""

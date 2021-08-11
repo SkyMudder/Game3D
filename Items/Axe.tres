@@ -12,4 +12,4 @@ stackLimit = 1
 damageMultiplier = 1.25
 damageType = 0
 level = 0
-model = 0
+model = "res://Items/StoneAxe.tscn"

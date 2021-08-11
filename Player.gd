@@ -134,19 +134,15 @@ func switchItem() -> void:
 	if previousItem != null:
 		previousItem.queue_free()
 	if playerItem != null:
-		var model
-		if playerItem.model == 0:
-			model = preload("res://Items/IronHandAxe.tscn")
-		elif playerItem.model == 1:
-			model = preload("res://Items/IronPickAxe.tscn")
-		else:
-			previousItem = null
+		if playerItem.model != "":
+			var model
+			print(playerItem.model)
+			model = load(playerItem.model)
+			currentItem = model.instance()
+			$Rotation_Helper/Camera.add_child(currentItem)
+			previousItem = currentItem
+			currentItem = null
 			return
-		currentItem = model.instance()
-		$Rotation_Helper/Camera.add_child(currentItem)
-		previousItem = currentItem
-		currentItem = null
-		return
 	else:
 		previousItem = null
 	previousItem = currentItem
