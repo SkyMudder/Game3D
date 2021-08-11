@@ -16,7 +16,6 @@ func _ready():
 	# warning-ignore:return_value_discarded
 	timer.connect("timeout", self, "_on_timer_timeout")
 	
-	
 func _on_Hurtbox_area_entered(_area):
 	takeDamage(self)
 	if timer.time_left == 0:

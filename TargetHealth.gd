@@ -13,5 +13,4 @@ func showAndReset():
 	timer.start(2)
 	
 func _on_timer_timeout():
-	print("LUL")
 	self.visible = false

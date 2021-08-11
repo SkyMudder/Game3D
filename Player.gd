@@ -137,7 +137,7 @@ func switchItem(_a):
 		if playerItem.model == 0:
 			model = preload("res://Items/IronHandAxe.tscn")
 		elif playerItem.model == 1:
-			model = preload("res://Items/IronPickaxe.tscn")
+			model = preload("res://Items/IronPickAxe.tscn")
 		else:
 			previousItem = null
 			return
