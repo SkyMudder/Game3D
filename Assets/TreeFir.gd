@@ -10,9 +10,6 @@ var resource : Resource = preload("res://Items/WoodDark.tres")
 var amount : int = 6
 
 func _ready():
-	$Hurtbox/CollisionShape.set_disabled(true)
-	yield(get_tree().create_timer(0.1), "timeout")
-	$Hurtbox/CollisionShape.set_disabled(false)
 	timer = Timer.new()
 	add_child(timer)
 	timer.wait_time = 0.5

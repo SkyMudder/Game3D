@@ -5,7 +5,7 @@ const chunkSize : int = 64
 const chunkAmount : int = 16
 
 var noise : OpenSimplexNoise
-var chunks : Dictionary = {}
+var chunks = {}
 
 func _process(_delta):
 	updateChunks()
@@ -17,7 +17,7 @@ func _ready():
 	noise.seed = 0
 	noise.period = 120
 	
-func addChunk(x, z) -> void:
+func addChunk(x, z):
 	var key : String = str(x) + "," + str(z)
 	
 	if chunks.has(key):
@@ -25,13 +25,13 @@ func addChunk(x, z) -> void:
 	
 	loadChunk(x, z)
 	
-func loadChunk(x, z) -> void:
+func loadChunk(x, z):
 	var chunk : Chunk = Chunk.new(noise, x * chunkSize, z * chunkSize, chunkSize)
 	chunk.translation = Vector3(x * chunkSize, 0, z * chunkSize)
 	
 	loadDone(chunk)
 	
-func loadDone(chunk) -> void:
+func loadDone(chunk):
 	add_child(chunk)
 	var key : String = str(chunk.x / chunkSize) + "," + str(chunk.z / chunkSize)
 	chunks[key] = chunk
@@ -44,7 +44,7 @@ func getChunk(x, z):
 		
 	return null
 	
-func updateChunks() -> void:
+func updateChunks():
 	var playerPosition = $Player.translation
 	# warning-ignore:integer_division
 	var playerX = int(playerPosition.x) / chunkSize
@@ -58,14 +58,13 @@ func updateChunks() -> void:
 			if chunk != null:
 				chunk.shouldRemove = false
 	
-func cleanUpChunks() -> void:
+func cleanUpChunks():
 	for key in chunks:
 		var chunk = chunks[key]
 		if chunk.shouldRemove:
 			chunk.queue_free()
-	# warning-ignore:return_value_discarded
 			chunks.erase(key)
 	
-func resetChunks() -> void:
+func resetChunks():
 	for key in chunks:
 		chunks[key].shouldRemove = true
