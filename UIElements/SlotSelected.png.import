@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/StonePickAxe.png-ccfc160ba4d1e991f10340c562d4d848.stex"
+path="res://.import/SlotSelected.png-dd6c40dcbd987d09e5291b1d258609cf.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Items/StonePickAxe.png"
-dest_files=[ "res://.import/StonePickAxe.png-ccfc160ba4d1e991f10340c562d4d848.stex" ]
+source_file="res://UIElements/SlotSelected.png"
+dest_files=[ "res://.import/SlotSelected.png-dd6c40dcbd987d09e5291b1d258609cf.stex" ]
 
 [params]
 

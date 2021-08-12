@@ -1,0 +1,15 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://Items/Item.gd" type="Script" id=1]
+[ext_resource path="res://Items/IronPickAxe.png" type="Texture" id=2]
+
+[resource]
+script = ExtResource( 1 )
+name = "Iron PickAxe"
+texture = ExtResource( 2 )
+amount = 1
+stackLimit = 1
+damageMultiplier = 1.5
+damageType = 1
+level = 1
+model = "res://Items/IronPickAxe.tscn"

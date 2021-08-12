@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/StonePickAxe.png-ccfc160ba4d1e991f10340c562d4d848.stex"
+path="res://.import/IronPickAxe.png-fdb4d2528ea9c09ff15d5e45b73b674a.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Items/StonePickAxe.png"
-dest_files=[ "res://.import/StonePickAxe.png-ccfc160ba4d1e991f10340c562d4d848.stex" ]
+source_file="res://Items/IronPickAxe.png"
+dest_files=[ "res://.import/IronPickAxe.png-fdb4d2528ea9c09ff15d5e45b73b674a.stex" ]
 
 [params]
 

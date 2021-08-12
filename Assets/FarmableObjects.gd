@@ -24,5 +24,5 @@ func takeDamage(object) -> void:
 """Check if an Item is compatible with the Farmable Object"""
 func checkItemCompatible(object, damageType, level) -> bool:
 	var a = object.damageType == damageType
-	var b = object.level == level
+	var b = object.level <= level
 	return a and b

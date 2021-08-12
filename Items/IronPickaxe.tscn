@@ -113,6 +113,7 @@ anims/Slash = SubResource( 5 )
 
 [node name="Hitbox" parent="." instance=ExtResource( 1 )]
 transform = Transform( 0.1, -2.98023e-08, 0, 7.45058e-09, 0.6, 1.33227e-15, 0, -5.32907e-15, 0.1, 0.593284, 0.0460551, 0.18134 )
+collision_layer = 4
 
 [node name="CollisionShape" parent="Hitbox" index="0"]
 transform = Transform( 1, -2.98023e-08, -5.96046e-08, 2.98023e-08, 1, -2.98023e-08, -8.88178e-16, 0, 1, 0, 0, 0 )

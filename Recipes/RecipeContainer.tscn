@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Items/Stone.png" type="Texture" id=2]
-[ext_resource path="res://Items/StonePickAxe.png" type="Texture" id=3]
+[ext_resource path="res://Items/IronPickAxe.png" type="Texture" id=3]
 [ext_resource path="res://Recipes/RecipeContainer.gd" type="Script" id=4]
 [ext_resource path="res://UIElements/Selected64x16.png" type="Texture" id=5]
 
@@ -16,45 +16,47 @@ __meta__ = {
 
 [node name="ItemTexture" type="TextureRect" parent="."]
 margin_right = 128.0
-margin_bottom = 131.0
+margin_bottom = 152.0
 rect_min_size = Vector2( 128, 128 )
 texture = ExtResource( 3 )
 stretch_mode = 5
 
 [node name="IngredientsAmount" type="HBoxContainer" parent="."]
 margin_left = 132.0
-margin_right = 607.0
-margin_bottom = 131.0
+margin_right = 598.0
+margin_bottom = 152.0
 
 [node name="Ingredients" type="VBoxContainer" parent="IngredientsAmount"]
-margin_right = 41.0
-margin_bottom = 131.0
+margin_right = 32.0
+margin_bottom = 152.0
 
 [node name="Ingredient1Texture" type="TextureRect" parent="IngredientsAmount/Ingredients"]
-margin_right = 41.0
-margin_bottom = 41.0
-rect_min_size = Vector2( 41, 41 )
+margin_right = 32.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+size_flags_horizontal = 12
+size_flags_vertical = 12
 texture = ExtResource( 2 )
-stretch_mode = 6
+expand = true
 
 [node name="Ingredient2Texture" type="TextureRect" parent="IngredientsAmount/Ingredients"]
-margin_top = 45.0
-margin_right = 41.0
-margin_bottom = 86.0
-rect_min_size = Vector2( 41, 41 )
-stretch_mode = 6
+margin_top = 36.0
+margin_right = 32.0
+margin_bottom = 68.0
+rect_min_size = Vector2( 32, 32 )
+expand = true
 
 [node name="Ingredient3Texture" type="TextureRect" parent="IngredientsAmount/Ingredients"]
-margin_top = 90.0
-margin_right = 41.0
-margin_bottom = 131.0
-rect_min_size = Vector2( 41, 41 )
-stretch_mode = 6
+margin_top = 72.0
+margin_right = 32.0
+margin_bottom = 104.0
+rect_min_size = Vector2( 32, 32 )
+expand = true
 
 [node name="IngredientNames" type="VBoxContainer" parent="IngredientsAmount"]
-margin_left = 45.0
-margin_right = 86.0
-margin_bottom = 131.0
+margin_left = 36.0
+margin_right = 77.0
+margin_bottom = 152.0
 
 [node name="Ingredient1Name" type="Label" parent="IngredientsAmount/IngredientNames"]
 margin_right = 41.0
@@ -78,9 +80,9 @@ rect_min_size = Vector2( 41, 41 )
 valign = 1
 
 [node name="Amounts" type="VBoxContainer" parent="IngredientsAmount"]
-margin_left = 90.0
-margin_right = 131.0
-margin_bottom = 131.0
+margin_left = 81.0
+margin_right = 122.0
+margin_bottom = 152.0
 
 [node name="Amount1" type="Label" parent="IngredientsAmount/Amounts"]
 margin_right = 41.0
@@ -104,9 +106,9 @@ rect_min_size = Vector2( 41, 41 )
 valign = 1
 
 [node name="Description" type="VBoxContainer" parent="IngredientsAmount"]
-margin_left = 135.0
-margin_right = 475.0
-margin_bottom = 131.0
+margin_left = 126.0
+margin_right = 466.0
+margin_bottom = 152.0
 
 [node name="Description" type="Label" parent="IngredientsAmount/Description"]
 margin_right = 340.0

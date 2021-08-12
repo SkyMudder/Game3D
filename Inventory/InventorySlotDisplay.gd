@@ -7,8 +7,8 @@ onready var playerInventories : Array = Inventories.playerInventories
 var inventory : Inventory
 onready var player = get_node("/root/World/Player")
 
-onready var textureRect = get_node("TextureRect")
-onready var itemAmount = get_node("TextureRect/ItemAmount")
+onready var textureRect = get_node("Item")
+onready var itemAmount = get_node("Item/ItemAmount")
 onready var emptySlotTexture = preload("res://UIElements/EmptyInventorySlot.png")
 onready var selected = get_node("Selected")
 onready var furnaceView = get_parent().get_parent().get_parent()
@@ -42,7 +42,7 @@ func get_drag_data(_position) -> Dictionary:
 			Inventories.notifyMoving(true)
 		dragPreview = TextureRect.new()
 		dragPreview.texture = item.texture
-		dragPreview.set_scale(Vector2(5, 5))
+		
 		data.id = inventory.id
 		data.name = item.name
 		data.previousAmount = item.amount
