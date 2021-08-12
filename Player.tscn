@@ -1,9 +1,11 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Player.gd" type="Script" id=1]
 [ext_resource path="res://Inventory/InventoryDisplay.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Inventory/ToolbarDisplay.gd" type="Script" id=3]
 [ext_resource path="res://TargetHealth.gd" type="Script" id=4]
+[ext_resource path="res://Recipes/CraftingContainer.tscn" type="PackedScene" id=5]
+[ext_resource path="res://TabContainer.gd" type="Script" id=6]
 
 [sub_resource type="CapsuleShape" id=1]
 radius = 0.684425
@@ -35,29 +37,58 @@ collide_with_bodies = false
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
 shape = SubResource( 1 )
 
-[node name="InventoryCenterContainer" type="CenterContainer" parent="."]
+[node name="TabContainer" type="TabContainer" parent="."]
 visible = false
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -401.5
-margin_top = -203.0
-margin_right = 401.5
-margin_bottom = 203.0
+margin_left = -334.0
+margin_top = -220.0
+margin_right = 276.0
+margin_bottom = 218.0
+tab_align = 0
+script = ExtResource( 6 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="InventoryDisplay" parent="InventoryCenterContainer" instance=ExtResource( 2 )]
+[node name="Inventory" type="Tabs" parent="TabContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
+tab_align = 0
+
+[node name="InventoryCenterContainer" type="CenterContainer" parent="TabContainer/Inventory"]
+margin_right = 558.0
+margin_bottom = 260.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="InventoryDisplay" parent="TabContainer/Inventory/InventoryCenterContainer" instance=ExtResource( 2 )]
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 401.0
-margin_top = 203.0
-margin_right = 401.0
-margin_bottom = 203.0
+margin_left = 279.0
+margin_top = 130.0
+margin_right = 279.0
+margin_bottom = 130.0
+
+[node name="Crafting" type="Tabs" parent="TabContainer"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
+
+[node name="CraftingContainer" parent="TabContainer/Crafting" instance=ExtResource( 5 )]
 
 [node name="ToolbarCenterContainer" type="CenterContainer" parent="."]
 anchor_left = 0.5
@@ -102,3 +133,5 @@ script = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[connection signal="tab_changed" from="TabContainer" to="TabContainer" method="_on_TabContainer_tab_changed"]

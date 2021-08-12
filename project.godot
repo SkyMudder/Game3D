@@ -23,11 +23,17 @@ _global_script_classes=[ {
 "class": "Item",
 "language": "GDScript",
 "path": "res://Items/Item.gd"
+}, {
+"base": "Resource",
+"class": "Recipe",
+"language": "GDScript",
+"path": "res://Recipes/Recipe.gd"
 } ]
 _global_script_class_icons={
 "Chunk": "",
 "Inventory": "",
-"Item": ""
+"Item": "",
+"Recipe": ""
 }
 
 [application]
@@ -41,6 +47,7 @@ config/icon="res://icon.png"
 Inventories="*res://Singletons/Inventories.gd"
 States="*res://Singletons/States.gd"
 Types="*res://Singletons/Types.gd"
+Recipes="*res://Singletons/Recipes.gd"
 
 [display]
 

@@ -27,8 +27,8 @@ func _ready():
 		x.connect("slot_updated", self, "_on_slot_updated")
 	for _x in range(30):
 		inventory.add(preload("res://Items/Wood.tres"))
-	inventory.add(preload("res://Items/Pickaxe.tres"))
-	inventory.add(preload("res://Items/Axe.tres"))
+	inventory.add(preload("res://Items/StonePickAxe.tres"))
+	inventory.add(preload("res://Items/StoneAxe.tres"))
 	
 """When Item changes, update the Inventory Slot Display"""
 func _on_items_changed(inventoryChanged, index) -> void:

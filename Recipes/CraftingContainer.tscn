@@ -1,0 +1,43 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Recipes/CraftingContainer.gd" type="Script" id=2]
+
+[node name="CraftingContainer" type="HBoxContainer"]
+anchor_bottom = 0.151852
+margin_right = 1920.0
+margin_bottom = 136.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+margin_right = 650.0
+margin_bottom = 470.0
+rect_min_size = Vector2( 650, 470 )
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="Recipes" type="VBoxContainer" parent="ScrollContainer"]
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="CraftingSection" type="VBoxContainer" parent="."]
+margin_left = 654.0
+margin_right = 910.0
+margin_bottom = 470.0
+
+[node name="ItemTexture" type="TextureRect" parent="CraftingSection"]
+margin_right = 256.0
+margin_bottom = 256.0
+rect_min_size = Vector2( 256, 256 )
+stretch_mode = 5
+
+[node name="CraftButton" type="Button" parent="CraftingSection"]
+margin_top = 260.0
+margin_right = 256.0
+margin_bottom = 300.0
+rect_min_size = Vector2( 256, 40 )
+text = "CRAFT"
+
+[connection signal="pressed" from="CraftingSection/CraftButton" to="." method="_on_CraftButton_pressed"]

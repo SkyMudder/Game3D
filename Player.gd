@@ -89,10 +89,10 @@ func process_input(_delta):
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		# ----------------------------------
 		# Capturing/Freeing the cursor
-		if $InventoryCenterContainer.visible:
-			$InventoryCenterContainer.visible = false
+		if $TabContainer.visible:
+			$TabContainer.visible = false
 		else:
-			$InventoryCenterContainer.visible = true
+			$TabContainer.visible = true
 		# ----------------------------------
 	# ----------------------------------
 	

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" load_steps=5 format=2]
+
+[ext_resource path="res://Recipes/Recipe.gd" type="Script" id=1]
+[ext_resource path="res://Items/Stone.tres" type="Resource" id=2]
+[ext_resource path="res://Items/Wood.tres" type="Resource" id=3]
+[ext_resource path="res://Items/StoneAxe.tres" type="Resource" id=4]
+
+[resource]
+script = ExtResource( 1 )
+product = ExtResource( 4 )
+description = "Used for chopping Wood"
+ingredients = [ ExtResource( 2 ), ExtResource( 3 ) ]
+ingredientAmounts = [ 2, 2 ]

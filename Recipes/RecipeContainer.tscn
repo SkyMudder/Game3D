@@ -1,0 +1,125 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Items/Stone.png" type="Texture" id=2]
+[ext_resource path="res://Items/StonePickAxe.png" type="Texture" id=3]
+[ext_resource path="res://Recipes/RecipeContainer.gd" type="Script" id=4]
+[ext_resource path="res://UIElements/Selected64x16.png" type="Texture" id=5]
+
+[node name="RecipeContainer" type="HBoxContainer"]
+margin_right = 604.0
+margin_bottom = 131.0
+rect_min_size = Vector2( 512, 128 )
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ItemTexture" type="TextureRect" parent="."]
+margin_right = 128.0
+margin_bottom = 131.0
+rect_min_size = Vector2( 128, 128 )
+texture = ExtResource( 3 )
+stretch_mode = 5
+
+[node name="IngredientsAmount" type="HBoxContainer" parent="."]
+margin_left = 132.0
+margin_right = 607.0
+margin_bottom = 131.0
+
+[node name="Ingredients" type="VBoxContainer" parent="IngredientsAmount"]
+margin_right = 41.0
+margin_bottom = 131.0
+
+[node name="Ingredient1Texture" type="TextureRect" parent="IngredientsAmount/Ingredients"]
+margin_right = 41.0
+margin_bottom = 41.0
+rect_min_size = Vector2( 41, 41 )
+texture = ExtResource( 2 )
+stretch_mode = 6
+
+[node name="Ingredient2Texture" type="TextureRect" parent="IngredientsAmount/Ingredients"]
+margin_top = 45.0
+margin_right = 41.0
+margin_bottom = 86.0
+rect_min_size = Vector2( 41, 41 )
+stretch_mode = 6
+
+[node name="Ingredient3Texture" type="TextureRect" parent="IngredientsAmount/Ingredients"]
+margin_top = 90.0
+margin_right = 41.0
+margin_bottom = 131.0
+rect_min_size = Vector2( 41, 41 )
+stretch_mode = 6
+
+[node name="IngredientNames" type="VBoxContainer" parent="IngredientsAmount"]
+margin_left = 45.0
+margin_right = 86.0
+margin_bottom = 131.0
+
+[node name="Ingredient1Name" type="Label" parent="IngredientsAmount/IngredientNames"]
+margin_right = 41.0
+margin_bottom = 41.0
+rect_min_size = Vector2( 41, 41 )
+text = "Wood"
+valign = 1
+
+[node name="Ingredient2Name" type="Label" parent="IngredientsAmount/IngredientNames"]
+margin_top = 45.0
+margin_right = 41.0
+margin_bottom = 86.0
+rect_min_size = Vector2( 41, 41 )
+valign = 1
+
+[node name="Ingredient3Name" type="Label" parent="IngredientsAmount/IngredientNames"]
+margin_top = 90.0
+margin_right = 41.0
+margin_bottom = 131.0
+rect_min_size = Vector2( 41, 41 )
+valign = 1
+
+[node name="Amounts" type="VBoxContainer" parent="IngredientsAmount"]
+margin_left = 90.0
+margin_right = 131.0
+margin_bottom = 131.0
+
+[node name="Amount1" type="Label" parent="IngredientsAmount/Amounts"]
+margin_right = 41.0
+margin_bottom = 41.0
+rect_min_size = Vector2( 41, 41 )
+text = "3"
+valign = 1
+
+[node name="Amount2" type="Label" parent="IngredientsAmount/Amounts"]
+margin_top = 45.0
+margin_right = 41.0
+margin_bottom = 86.0
+rect_min_size = Vector2( 41, 41 )
+valign = 1
+
+[node name="Amount3" type="Label" parent="IngredientsAmount/Amounts"]
+margin_top = 90.0
+margin_right = 41.0
+margin_bottom = 131.0
+rect_min_size = Vector2( 41, 41 )
+valign = 1
+
+[node name="Description" type="VBoxContainer" parent="IngredientsAmount"]
+margin_left = 135.0
+margin_right = 475.0
+margin_bottom = 131.0
+
+[node name="Description" type="Label" parent="IngredientsAmount/Description"]
+margin_right = 340.0
+margin_bottom = 128.0
+rect_min_size = Vector2( 340, 128 )
+text = "A Pickaxe is used to mine Stone and other Minerals"
+valign = 1
+autowrap = true
+
+[node name="Selected" type="Sprite" parent="."]
+visible = false
+position = Vector2( 304, 64 )
+scale = Vector2( 9.625, 8.5 )
+texture = ExtResource( 5 )
+
+[connection signal="gui_input" from="." to="." method="_on_RecipeContainer_gui_input"]
