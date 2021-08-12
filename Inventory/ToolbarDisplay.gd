@@ -111,4 +111,4 @@ func canSwitchSlot() -> bool:
 When an Item is placed in an already selected Slot"""
 func _on_slot_updated(index):
 	get_child(index).select()
-	emit_signal("item_switched", 0)
+	emit_signal("item_switched")

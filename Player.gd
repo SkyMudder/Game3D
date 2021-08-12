@@ -2,6 +2,8 @@ extends KinematicBody
 
 
 onready var toolbar = get_node("ToolbarCenterContainer/InventoryDisplay")
+onready var rayCast = get_node("Rotation_Helper/Camera/RayCast")
+onready var RockSmall = preload("res://Assets/RockSmall.tscn")
 
 var playerItem : Item # The Item the Player has equipped
 var currentItem : Spatial # The 3D Model of the Item
@@ -32,6 +34,11 @@ func _ready():
 func _physics_process(delta):
 	process_input(delta)
 	process_movement(delta)
+	var object = rayCast.get_collider()
+	if object != null:
+		if object.pickable:
+			if Input.is_action_just_pressed("interact"):
+				object.interact()
 
 func process_input(_delta):
 
@@ -136,7 +143,6 @@ func switchItem() -> void:
 	if playerItem != null:
 		if playerItem.model != "":
 			var model
-			print(playerItem.model)
 			model = load(playerItem.model)
 			currentItem = model.instance()
 			$Rotation_Helper/Camera.add_child(currentItem)

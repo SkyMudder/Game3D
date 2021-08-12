@@ -15,6 +15,7 @@ var TreeFir : PackedScene = preload("res://Assets/TreeFir.tscn")
 var Grass : PackedScene = preload("res://Assets/Grass.tscn")
 var RawIronRock : PackedScene = preload("res://Assets/RawIronRock.tscn")
 var RawCoalRock : PackedScene = preload("res://Assets/RawCoalRock.tscn")
+var RockSmall : PackedScene = preload("res://Assets/RockSmall.tscn")
 
 func _init(terrainNoise, chunkX, chunkZ, chunkSize):
 	self.noise = terrainNoise
@@ -76,6 +77,11 @@ func generateChunk() -> void:
 			rawCoalRock.translation = vertex
 			rawCoalRock.rotation_degrees.y = rng.randf_range(0, 360)
 			add_child(rawCoalRock)
+		if rand == 6:
+			var rockSmall = RockSmall.instance()
+			rockSmall.translation = vertex
+			rockSmall.rotation_degrees.y = rng.randf_range(0, 360)
+			add_child(rockSmall)
 		
 	for y in range(arrayPlane.get_surface_count()):
 		arrayPlane.surface_remove(y)

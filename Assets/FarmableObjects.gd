@@ -1,6 +1,7 @@
 extends Node
 
 
+var pickable = false
 onready var player = get_node("/root/World/Player")
 onready var playerTargetHealth = get_node("/root/World/Player/TargetHealth")
 onready var toolbar = get_node("/root/World/Player/ToolbarCenterContainer/InventoryDisplay")
