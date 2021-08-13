@@ -34,13 +34,13 @@ func checkItemCompatible(object, damageType, level) -> bool:
 func createBreakingEffect(object):
 	var effect = BreakingEffect.instance()
 	effect.draw_pass_1.material = object.material
-	effect.translation = object.translation
+	effect.translation = object.translation 
 	object.get_parent().add_child(effect)
 	effect.emitting = true
 	
 func createDamagingEffect(object):
 	var effect = DamagingEffect.instance()
 	effect.draw_pass_1.material = object.material
-	effect.translation = object.translation
-	object.get_parent().add_child(effect)
+	effect.translation = object.effectOffset
+	object.add_child(effect)
 	effect.emitting = true

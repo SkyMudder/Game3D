@@ -7,10 +7,13 @@ const chunkAmount : int = 16
 var noise : OpenSimplexNoise
 var chunks = {}
 
+var ready = true
+
 func _process(_delta):
 	updateChunks()
 	cleanUpChunks()
 	resetChunks()
+	ready = true
 	
 func _ready():
 	noise = OpenSimplexNoise.new()
@@ -20,9 +23,10 @@ func _ready():
 func addChunk(x, z):
 	var key : String = str(x) + "," + str(z)
 	
-	if chunks.has(key):
+	if chunks.has(key) or !ready:
 		return
 	
+	ready = false
 	loadChunk(x, z)
 	
 func loadChunk(x, z):
@@ -32,7 +36,7 @@ func loadChunk(x, z):
 	loadDone(chunk)
 	
 func loadDone(chunk):
-	add_child(chunk)
+	call_deferred("add_child", chunk)
 	var key : String = str(chunk.x / chunkSize) + "," + str(chunk.z / chunkSize)
 	chunks[key] = chunk
 	

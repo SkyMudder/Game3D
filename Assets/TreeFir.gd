@@ -9,6 +9,7 @@ var damageType = Types.resourceType.WOOD
 var resource : Resource = preload("res://Items/WoodDark.tres")
 var amount : int = 6
 var material = preload("res://Assets/Log1.material")
+var effectOffset = Vector3(0, -2.7, 0)
 
 func _ready():
 	timer = Timer.new()

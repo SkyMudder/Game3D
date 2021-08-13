@@ -9,6 +9,7 @@ var damageType = Types.resourceType.MINERALS
 var resource : Resource = preload("res://Items/Stone.tres")
 var amount : int = 4
 var material = preload("res://Assets/Rock.material")
+var effectOffset = Vector3(0, 1, 0)
 
 func _ready():
 	timer = Timer.new()
