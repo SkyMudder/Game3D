@@ -138,5 +138,6 @@ collision_layer = 4
 [node name="CollisionShape" parent="Hitbox" index="0"]
 transform = Transform( 1, 5.96046e-08, 4.44089e-16, -5.96046e-08, 1, -8.88178e-16, 1.42109e-14, -4.26326e-14, 1, 0, 0, 0 )
 shape = SubResource( 7 )
+disabled = true
 
 [editable path="Hitbox"]
