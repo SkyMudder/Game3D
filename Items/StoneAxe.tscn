@@ -52,10 +52,10 @@ surfaces/0 = {
 "vertex_count": 458
 }
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=7]
 resource_name = "Idle"
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=8]
 resource_name = "Slash"
 length = 0.5
 tracks/0/type = "value"
@@ -68,7 +68,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.2, 0.4 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ Vector3( 0.2, -0.474202, -0.3 ), Vector3( 0.1, -0.5, -0.3 ), Vector3( 0.2, -0.474202, -0.3 ) ]
+"values": [ Vector3( 0.2, -0.5, -0.3 ), Vector3( 0.1, -0.5, -0.3 ), Vector3( 0.2, -0.5, -0.3 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath(".:rotation_degrees")
@@ -81,6 +81,23 @@ tracks/1/keys = {
 "transitions": PoolRealArray( 0.683019, 0.25, 0.683019 ),
 "update": 0,
 "values": [ Vector3( 0, 90, 60 ), Vector3( 0, 70, 10 ), Vector3( 0, 90, 60 ) ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.1, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "activateCollision"
+}, {
+"args": [  ],
+"method": "deactivateCollision"
+} ]
 }
 
 [sub_resource type="BoxShape" id=6]
@@ -106,8 +123,8 @@ material/0 = null
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "Idle"
-anims/Idle = SubResource( 4 )
-anims/Slash = SubResource( 5 )
+anims/Idle = SubResource( 7 )
+anims/Slash = SubResource( 8 )
 
 [node name="Hitbox" parent="." instance=ExtResource( 4 )]
 transform = Transform( 0.1, -2.98023e-09, -1.05879e-22, 2.98023e-09, 0.1, 3.55271e-15, 0, -7.10543e-15, 0.05, 0.524355, -0.0509018, 0.167881 )
@@ -116,7 +133,5 @@ collision_layer = 4
 [node name="CollisionShape" parent="Hitbox" index="0"]
 transform = Transform( 1, 5.96046e-08, 4.44089e-16, -5.96046e-08, 1, -8.88178e-16, 1.42109e-14, -4.26326e-14, 1, 0, 0, 0 )
 shape = SubResource( 6 )
-
-[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 
 [editable path="Hitbox"]

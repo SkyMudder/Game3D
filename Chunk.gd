@@ -32,8 +32,8 @@ func _ready():
 func generateChunk() -> void:
 	var planeMesh = PlaneMesh.new()
 	planeMesh.size = Vector2(size, size)
-	planeMesh.subdivide_depth = size * 0.3
-	planeMesh.subdivide_width = size * 0.3
+	planeMesh.subdivide_depth = size * 0.25
+	planeMesh.subdivide_width = size * 0.25
 	
 	planeMesh.material = preload("res://Assets/Terrain.tres")
 	
@@ -53,36 +53,18 @@ func generateChunk() -> void:
 		var rand = rng.randi_range(0, 300)
 		
 		if rand == 1:
-			var rock = Rock.instance()
-			rock.translation = vertex
-			rock.rotation_degrees = Vector3(rng.randf_range(0, 30), rng.randf_range(0, 90), 0)
-			add_child(rock)
+			instanceObject(Rock, vertex, Vector3(rng.randf_range(0, 30), rng.randf_range(0, 90), 0))
 		if rand == 2:
-			var treeOak = TreeOak.instance()
-			treeOak.translation = vertex
-			treeOak.rotation_degrees.y = rng.randf_range(0, 360)
-			add_child(treeOak)
+			instanceObject(TreeOak, vertex, Vector3(0, rng.randf_range(0, 360), 0))
 		if rand == 3:
-			var treeFir = TreeFir.instance()
-			treeFir.translation = Vector3(vertex.x, vertex.y + 3, vertex.z)
-			treeFir.rotation_degrees.y = rng.randf_range(0, 360)
-			add_child(treeFir)
+			instanceObject(TreeFir, Vector3(vertex.x, vertex.y + 3, vertex.z), Vector3(0, rng.randf_range(0, 360), 0))
 		if rand == 4:
-			var rawIronRock = RawIronRock.instance()
-			rawIronRock.translation = vertex
-			rawIronRock.rotation_degrees.y = rng.randf_range(0, 360)
-			add_child(rawIronRock)
+			instanceObject(RawIronRock, vertex, Vector3(0, rng.randf_range(0, 360), 0))
 		if rand == 5:
-			var rawCoalRock = RawCoalRock.instance()
-			rawCoalRock.translation = vertex
-			rawCoalRock.rotation_degrees.y = rng.randf_range(0, 360)
-			add_child(rawCoalRock)
+			instanceObject(RawCoalRock, vertex, Vector3(0, rng.randf_range(0, 360), 0))
 		if rand == 6:
-			var rockSmall = RockSmall.instance()
-			rockSmall.translation = vertex
-			rockSmall.rotation_degrees.y = rng.randf_range(0, 360)
-			add_child(rockSmall)
-		
+			instanceObject(RockSmall, vertex, Vector3(0, rng.randf_range(0, 360), 0))
+			
 	for y in range(arrayPlane.get_surface_count()):
 		arrayPlane.surface_remove(y)
 		
@@ -96,3 +78,9 @@ func generateChunk() -> void:
 	meshInstance.create_trimesh_collision()
 	meshInstance.cast_shadow = GeometryInstance.SHADOW_CASTING_SETTING_ON
 	add_child(meshInstance)
+	
+func instanceObject(Instance, position, rotation):
+	var inst = Instance.instance()
+	inst.translation = position
+	inst.rotation_degrees = rotation
+	add_child(inst)

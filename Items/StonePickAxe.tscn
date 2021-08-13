@@ -53,10 +53,10 @@ surfaces/0 = {
 "vertex_count": 458
 }
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=7]
 resource_name = "Idle"
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=8]
 resource_name = "Slash"
 length = 0.5
 tracks/0/type = "value"
@@ -69,7 +69,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.2, 0.4 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ Vector3( 0.2, -0.474202, -0.3 ), Vector3( 0.1, -0.5, -0.3 ), Vector3( 0.2, -0.474202, -0.3 ) ]
+"values": [ Vector3( 0.2, -0.5, -0.3 ), Vector3( 0.1, -0.5, -0.3 ), Vector3( 0.2, -0.5, -0.3 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath(".:rotation_degrees")
@@ -83,12 +83,23 @@ tracks/1/keys = {
 "update": 0,
 "values": [ Vector3( 0, 90, 60 ), Vector3( 0, 70, 10 ), Vector3( 0, 90, 60 ) ]
 }
+tracks/2/type = "method"
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray(  ),
+"transitions": PoolRealArray(  ),
+"values": [  ]
+}
 
 [sub_resource type="BoxShape" id=6]
 extents = Vector3( 0.557575, 0.378036, 0.767035 )
 
 [node name="StonePickaxe" type="Spatial"]
-transform = Transform( -2.18557e-08, 3.78552e-08, 1, 0.866025, 0.5, 0, -0.5, 0.866025, -4.37114e-08, 0.2, -0.474202, -0.3 )
+transform = Transform( -2.18557e-08, 3.78552e-08, 1, 0.866025, 0.5, 0, -0.5, 0.866025, -4.37114e-08, 0.2, -0.5, -0.3 )
 script = ExtResource( 2 )
 
 [node name="Cube" type="MeshInstance" parent="."]
@@ -108,8 +119,8 @@ material/0 = null
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "Idle"
-anims/Idle = SubResource( 4 )
-anims/Slash = SubResource( 5 )
+anims/Idle = SubResource( 7 )
+anims/Slash = SubResource( 8 )
 
 [node name="Hitbox" parent="." instance=ExtResource( 1 )]
 transform = Transform( 0.1, -2.98023e-08, 0, 7.45058e-09, 0.6, 1.33227e-15, 0, -5.32907e-15, 0.1, 0.593284, 0.0460551, 0.18134 )
@@ -119,7 +130,5 @@ collision_layer = 4
 transform = Transform( 1, -2.98023e-08, -5.96046e-08, 2.98023e-08, 1, -2.98023e-08, -8.88178e-16, 0, 1, 0, 0, 0 )
 shape = SubResource( 6 )
 disabled = true
-
-[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 
 [editable path="Hitbox"]

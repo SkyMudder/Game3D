@@ -8,12 +8,18 @@ var noise : OpenSimplexNoise
 var chunks = {}
 
 var ready = true
+var maxs = 0
 
 func _process(_delta):
+	var start = OS.get_ticks_msec()
 	updateChunks()
 	cleanUpChunks()
 	resetChunks()
 	ready = true
+	var end = OS.get_ticks_msec()
+	if end - start > maxs:
+		maxs = end - start
+		print(end - start)
 	
 func _ready():
 	noise = OpenSimplexNoise.new()
