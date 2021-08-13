@@ -49,10 +49,9 @@ func generateChunk() -> void:
 		var vertex = meshDataTool.get_vertex(i)
 		
 		vertex.y = noise.get_noise_2d(vertex.x + x, vertex.z + z) * 30
-
-		meshDataTool.set_vertex(i, vertex)
 		
-		if i % 2 != 0:
+		meshDataTool.set_vertex(i, vertex)
+		if i % 2 == 0:
 			var objSpawns = noiseObj.get_noise_2d(vertex.x + x, vertex.z + z) * 6 + 3
 			if vertex.y > 2:
 				if objSpawns < 1 and objSpawns > 0.8:
@@ -86,8 +85,6 @@ func generateChunk() -> void:
 func generateWater():
 	var planeMesh = PlaneMesh.new()
 	planeMesh.size = Vector2(size, size)
-#	planeMesh.subdivide_depth = size * 0.25
-#	planeMesh.subdivide_width = size * 0.25
 	
 	planeMesh.material = preload("res://Assets/Water.tres")
 	
