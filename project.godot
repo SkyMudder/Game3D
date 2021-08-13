@@ -14,10 +14,25 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Chunk.gd"
 }, {
+"base": "HBoxContainer",
+"class": "ContributorClass",
+"language": "GDScript",
+"path": "res://addons/github-integration/scripts/ContributorClass.gd"
+}, {
+"base": "PanelContainer",
+"class": "GistItem",
+"language": "GDScript",
+"path": "res://addons/github-integration/scripts/GistItem.gd"
+}, {
 "base": "Resource",
 "class": "Inventory",
 "language": "GDScript",
 "path": "res://Inventory/Inventory.gd"
+}, {
+"base": "HBoxContainer",
+"class": "InvitationItem",
+"language": "GDScript",
+"path": "res://addons/github-integration/scripts/InvitationItem.gd"
 }, {
 "base": "Resource",
 "class": "Item",
@@ -28,12 +43,21 @@ _global_script_classes=[ {
 "class": "Recipe",
 "language": "GDScript",
 "path": "res://Recipes/Recipe.gd"
+}, {
+"base": "PanelContainer",
+"class": "RepositoryItem",
+"language": "GDScript",
+"path": "res://addons/github-integration/scripts/RepositoryItem.gd"
 } ]
 _global_script_class_icons={
 "Chunk": "",
+"ContributorClass": "",
+"GistItem": "",
 "Inventory": "",
+"InvitationItem": "",
 "Item": "",
-"Recipe": ""
+"Recipe": "",
+"RepositoryItem": ""
 }
 
 [application]
@@ -48,11 +72,19 @@ Inventories="*res://Singletons/Inventories.gd"
 States="*res://Singletons/States.gd"
 Types="*res://Singletons/Types.gd"
 Recipes="*res://Singletons/Recipes.gd"
+PluginSettings="*res://addons/github-integration/scripts/PluginSettings.gd"
+IconLoaderGithub="*res://addons/github-integration/scripts/IconLoaderGithub.gd"
+UserData="*res://addons/github-integration/scripts/user_data.gd"
+RestHandler="*res://addons/github-integration/scenes/RestHandler.tscn"
 
 [display]
 
 window/size/fullscreen=true
 window/vsync/use_vsync=false
+
+[editor_plugins]
+
+enabled=PoolStringArray( "res://addons/github-integration/plugin.cfg" )
 
 [input]
 

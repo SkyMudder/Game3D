@@ -4,27 +4,27 @@ extends Spatial
 const chunkSize : int = 64
 const chunkAmount : int = 16
 
-var noise : OpenSimplexNoise
+var terrainNoise : OpenSimplexNoise
+var objectNoise : OpenSimplexNoise
 var chunks = {}
 
 var ready = true
-var maxs = 0
 
 func _process(_delta):
-	var start = OS.get_ticks_msec()
 	updateChunks()
 	cleanUpChunks()
 	resetChunks()
 	ready = true
-	var end = OS.get_ticks_msec()
-	if end - start > maxs:
-		maxs = end - start
-		print(end - start)
 	
 func _ready():
-	noise = OpenSimplexNoise.new()
-	noise.seed = 0
-	noise.period = 120
+	terrainNoise = OpenSimplexNoise.new()
+	terrainNoise.seed = 0
+	terrainNoise.period = 140
+	terrainNoise.octaves = 3
+	objectNoise = OpenSimplexNoise.new()
+	objectNoise.seed = 1
+	objectNoise.period = 1
+	objectNoise.octaves = 3
 	
 func addChunk(x, z):
 	var key : String = str(x) + "," + str(z)
@@ -36,7 +36,7 @@ func addChunk(x, z):
 	loadChunk(x, z)
 	
 func loadChunk(x, z):
-	var chunk : Chunk = Chunk.new(noise, x * chunkSize, z * chunkSize, chunkSize)
+	var chunk : Chunk = Chunk.new(terrainNoise, objectNoise, x * chunkSize, z * chunkSize, chunkSize)
 	chunk.translation = Vector3(x * chunkSize, 0, z * chunkSize)
 	
 	loadDone(chunk)
