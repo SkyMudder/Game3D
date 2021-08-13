@@ -1,6 +1,7 @@
 extends Spatial
 class_name Chunk
 
+
 var noise : OpenSimplexNoise
 var x : float
 var z : float

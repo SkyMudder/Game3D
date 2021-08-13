@@ -90,9 +90,15 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray(  ),
-"transitions": PoolRealArray(  ),
-"values": [  ]
+"times": PoolRealArray( 0.1, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "activateCollision"
+}, {
+"args": [  ],
+"method": "deactivateCollision"
+} ]
 }
 
 [sub_resource type="BoxShape" id=6]

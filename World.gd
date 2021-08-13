@@ -20,7 +20,7 @@ func _ready():
 	terrainNoise = OpenSimplexNoise.new()
 	terrainNoise.seed = 0
 	terrainNoise.period = 140
-	terrainNoise.octaves = 3
+	terrainNoise.octaves = 2
 	objectNoise = OpenSimplexNoise.new()
 	objectNoise.seed = 1
 	objectNoise.period = 1
