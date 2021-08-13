@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Assets/FirWood.material" type="Material" id=1]
 [ext_resource path="res://Assets/FirLeaves1.material" type="Material" id=2]
@@ -74,6 +74,10 @@ surfaces/0 = {
 [sub_resource type="CylinderShape" id=5]
 height = 2.48324
 
+[sub_resource type="CylinderShape" id=8]
+radius = 0.934205
+height = 1.36942
+
 [sub_resource type="CapsuleShape" id=6]
 radius = 5.07725
 height = 0.002
@@ -109,8 +113,8 @@ transform = Transform( 0.4, 9.31323e-10, 0, 5.82077e-11, 3, 0, 0, 0, 0.4, 0.0004
 shape = SubResource( 5 )
 
 [node name="CollisionShape2" type="CollisionShape" parent="."]
-transform = Transform( 0.4, -8.73115e-11, 0, 5.82077e-11, 0.6, 0, 0, 0, 0.4, 0.127861, 0.605288, 0 )
-shape = SubResource( 6 )
+transform = Transform( 2.02775, -4.42615e-10, 0, 1.47232e-10, 1.51765, 0, 0, 0, 2.101, 0.128, 0.069, 0 )
+shape = SubResource( 8 )
 
 [node name="CollisionShape3" type="CollisionShape" parent="."]
 transform = Transform( 0.2, -4.36558e-11, 0, 2.91038e-11, 0.3, 0, 0, 0, 0.2, 0.127861, 3.44253, 0 )

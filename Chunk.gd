@@ -14,8 +14,8 @@ var Rock : PackedScene = preload("res://Assets/RockLarge.tscn")
 var TreeOak : PackedScene = preload("res://Assets/TreeOak.tscn")
 var TreeFir : PackedScene = preload("res://Assets/TreeFir.tscn")
 var Grass : PackedScene = preload("res://Assets/Grass.tscn")
-var RawIronRock : PackedScene = preload("res://Assets/RawIronRock.tscn")
-var RawCoalRock : PackedScene = preload("res://Assets/RawCoalRock.tscn")
+var RawIronRock : PackedScene = preload("res://Assets/IronRock.tscn")
+var RawCoalRock : PackedScene = preload("res://Assets/CoalRock.tscn")
 var RockSmall : PackedScene = preload("res://Assets/RockSmall.tscn")
 
 func _init(terrainNoise, objectNoise, chunkX, chunkZ, chunkSize):
@@ -34,8 +34,8 @@ func _ready():
 func generateChunk() -> void:
 	var planeMesh = PlaneMesh.new()
 	planeMesh.size = Vector2(size, size)
-	planeMesh.subdivide_depth = size * 0.3
-	planeMesh.subdivide_width = size * 0.3
+	planeMesh.subdivide_depth = size * 0.25
+	planeMesh.subdivide_width = size * 0.25
 	
 	planeMesh.material = preload("res://Assets/Terrain.tres")
 	
@@ -52,7 +52,7 @@ func generateChunk() -> void:
 
 		meshDataTool.set_vertex(i, vertex)
 		
-		if i % 2 == 0:
+		if i % 2 != 0:
 			var objSpawns = noiseObj.get_noise_2d(vertex.x + x, vertex.z + z) * 6 + 3
 			if vertex.y > 2:
 				if objSpawns < 1 and objSpawns > 0.8:
