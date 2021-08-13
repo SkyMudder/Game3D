@@ -11,5 +11,5 @@ amount = 1
 stackLimit = 1
 damageMultiplier = 1.5
 damageType = 0
-level = 1
+level = 2
 model = "res://Items/IronAxe.tscn"

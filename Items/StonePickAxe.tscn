@@ -53,10 +53,10 @@ surfaces/0 = {
 "vertex_count": 458
 }
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=4]
 resource_name = "Idle"
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=5]
 resource_name = "Slash"
 length = 0.5
 tracks/0/type = "value"
@@ -125,8 +125,8 @@ material/0 = null
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "Idle"
-anims/Idle = SubResource( 7 )
-anims/Slash = SubResource( 8 )
+anims/Idle = SubResource( 4 )
+anims/Slash = SubResource( 5 )
 
 [node name="Hitbox" parent="." instance=ExtResource( 1 )]
 transform = Transform( 0.1, -2.98023e-08, 0, 7.45058e-09, 0.6, 1.33227e-15, 0, -5.32907e-15, 0.1, 0.593284, 0.0460551, 0.18134 )

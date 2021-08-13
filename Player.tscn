@@ -141,4 +141,23 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="PickUp" type="Label" parent="."]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -17.0883
+margin_top = 17.2132
+margin_right = 28.9117
+margin_bottom = 31.2132
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Pick up"
+align = 1
+valign = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [connection signal="tab_changed" from="TabContainer" to="TabContainer" method="_on_TabContainer_tab_changed"]

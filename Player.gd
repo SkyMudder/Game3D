@@ -38,8 +38,11 @@ func _physics_process(delta):
 	var object = rayCastPickable.get_collider()
 	if object != null:
 		if object.pickable:
+			$PickUp.show()
 			if Input.is_action_just_pressed("interact"):
 				object.interact()
+	else:
+		$PickUp.hide()
 
 func process_input(_delta):
 

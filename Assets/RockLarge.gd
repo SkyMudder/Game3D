@@ -3,7 +3,7 @@ extends "res://Assets/FarmableObjects.gd"
 
 var timer : Timer
 var hp : int = 1000
-var level : int = 0
+var level : int = 1
 var recentlyDamaged = false
 var damageType = Types.resourceType.MINERALS
 var resource : Resource = preload("res://Items/Stone.tres")
