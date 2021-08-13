@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=2]
+
+[sub_resource type="Curve" id=1]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.221591 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=2]
+curve = SubResource( 1 )
+
+[sub_resource type="ParticlesMaterial" id=3]
+direction = Vector3( 0, 2, 0 )
+initial_velocity = 4.0
+scale_curve = SubResource( 2 )
+
+[sub_resource type="SphereMesh" id=4]
+radius = 0.125
+height = 0.25
+radial_segments = 16
+rings = 8
+
+[node name="ObjectDamaged" type="Particles"]
+emitting = false
+amount = 3
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource( 3 )
+draw_pass_1 = SubResource( 4 )

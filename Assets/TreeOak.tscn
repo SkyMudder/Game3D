@@ -111,7 +111,7 @@ height = 3.27713
 [sub_resource type="BoxShape" id=9]
 
 [node name="StaticBody" type="StaticBody"]
-transform = Transform( 1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 0.607, -0.921, -0.586 )
+transform = Transform( 1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 0, 0, 0 )
 script = ExtResource( 5 )
 
 [node name="Icosphere004" type="MeshInstance" parent="."]
@@ -139,7 +139,7 @@ transform = Transform( 0.889254, 0, 0, 0, -0.468509, 0, 0, 0, 0.889254, -0.13798
 mesh = SubResource( 5 )
 material/0 = null
 
-[node name="Cube" type="MeshInstance" parent="."]
+[node name="Main" type="MeshInstance" parent="."]
 transform = Transform( 0.494, 0, 0, 0, 0.628, 0, 0, 0, 0.494, -0.481554, 2.70222, 0.932412 )
 mesh = SubResource( 6 )
 material/0 = null

@@ -8,6 +8,7 @@ var recentlyDamaged = false
 var damageType = Types.resourceType.MINERALS
 var resource : Resource = preload("res://Items/Stone.tres")
 var amount : int = 4
+var material = preload("res://Assets/Rock.material")
 
 func _ready():
 	timer = Timer.new()
@@ -20,3 +21,6 @@ func _on_Hurtbox_area_entered(_area):
 	takeDamage(self)
 	if timer.time_left == 0:
 		timer.start()
+	
+func _on_timer_timeout():
+	recentlyDamaged = false

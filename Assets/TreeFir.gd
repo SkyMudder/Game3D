@@ -8,6 +8,7 @@ var recentlyDamaged = false
 var damageType = Types.resourceType.WOOD
 var resource : Resource = preload("res://Items/WoodDark.tres")
 var amount : int = 6
+var material = preload("res://Assets/Log1.material")
 
 func _ready():
 	timer = Timer.new()

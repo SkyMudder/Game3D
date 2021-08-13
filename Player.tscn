@@ -26,10 +26,17 @@ script = ExtResource( 1 )
 current = true
 far = 8192.0
 
-[node name="RayCast" type="RayCast" parent="Rotation_Helper/Camera"]
+[node name="RayCastPickable" type="RayCast" parent="Rotation_Helper/Camera"]
 enabled = true
 cast_to = Vector3( 0, 0, -2 )
 collision_mask = 8
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="RayCastFarmable" type="RayCast" parent="Rotation_Helper/Camera"]
+enabled = true
+cast_to = Vector3( 0, 0, -2 )
+collision_mask = 4
 collide_with_areas = true
 collide_with_bodies = false
 

@@ -5,7 +5,7 @@
 [ext_resource path="res://HitHurtBoxes/Hurtbox.tscn" type="PackedScene" id=3]
 [ext_resource path="res://HitHurtBoxes/Hurtbox.gd" type="Script" id=4]
 
-[sub_resource type="ArrayMesh" id=3]
+[sub_resource type="ArrayMesh" id=1]
 resource_name = "Cube"
 surfaces/0 = {
 "aabb": AABB( -0.444997, -0.48829, -0.421482, 0.87135, 0.969292, 0.902996 ),
@@ -29,7 +29,7 @@ script = ExtResource( 2 )
 
 [node name="Cube" type="MeshInstance" parent="."]
 transform = Transform( -0.513142, -1.31269e-07, 0, 1.67203e-07, -0.402863, 0, 0, 0, 0.491617, 0, 0, 0 )
-mesh = SubResource( 3 )
+mesh = SubResource( 1 )
 material/0 = null
 
 [node name="Hurtbox" parent="." instance=ExtResource( 3 )]

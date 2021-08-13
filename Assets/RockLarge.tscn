@@ -29,7 +29,7 @@ extents = Vector3( 1, 0.973417, 0.923894 )
 transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, -1.07128, 0 )
 script = ExtResource( 2 )
 
-[node name="Cube" type="MeshInstance" parent="."]
+[node name="Main" type="MeshInstance" parent="."]
 transform = Transform( 0.405561, 0, 0, 0, 0.405561, 0, 0, 0, 0.405561, -0.0635897, 0.128824, 0 )
 mesh = SubResource( 1 )
 material/0 = null

@@ -240,7 +240,7 @@ transform = Transform( -0.0243934, 0.0504017, 0.237638, 0.0323908, 0.285619, -0.
 mesh = SubResource( 10 )
 material/0 = null
 
-[node name="Cube" type="MeshInstance" parent="."]
+[node name="Main" type="MeshInstance" parent="."]
 transform = Transform( 1.20439, 0, 0, 0, 1.20439, 0, 0, 0, 1.20439, 0, 0, 0 )
 mesh = SubResource( 11 )
 material/0 = null

@@ -8,6 +8,7 @@ var recentlyDamaged = false
 var damageType = Types.resourceType.MINERALS
 var resource : Resource = preload("res://Items/Stone.tres")
 var amount : int = 6
+var material = preload("res://Assets/Rock.material")
 
 func _ready():
 	timer = Timer.new()

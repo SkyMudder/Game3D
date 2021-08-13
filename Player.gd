@@ -2,7 +2,8 @@ extends KinematicBody
 
 
 onready var toolbar = get_node("ToolbarCenterContainer/InventoryDisplay")
-onready var rayCast = get_node("Rotation_Helper/Camera/RayCast")
+onready var rayCastPickable = get_node("Rotation_Helper/Camera/RayCastPickable")
+onready var rayCastFarmable = get_node("Rotation_Helper/Camera/RayCastFarmable")
 onready var RockSmall = preload("res://Assets/RockSmall.tscn")
 
 var playerItem : Item # The Item the Player has equipped
@@ -34,7 +35,7 @@ func _ready():
 func _physics_process(delta):
 	process_input(delta)
 	process_movement(delta)
-	var object = rayCast.get_collider()
+	var object = rayCastPickable.get_collider()
 	if object != null:
 		if object.pickable:
 			if Input.is_action_just_pressed("interact"):
