@@ -33,8 +33,8 @@ func _ready():
 func generateChunk() -> void:
 	var planeMesh = PlaneMesh.new()
 	planeMesh.size = Vector2(size, size)
-	planeMesh.subdivide_depth = size * 0.25
-	planeMesh.subdivide_width = size * 0.25
+	planeMesh.subdivide_depth = size * 0.3
+	planeMesh.subdivide_width = size * 0.3
 	
 	planeMesh.material = preload("res://Assets/Terrain.tres")
 	
