@@ -122,7 +122,7 @@ tracks/2/keys = {
 [sub_resource type="BoxShape" id=7]
 
 [node name="IronHandAxe" type="Spatial"]
-transform = Transform( -2.18557e-08, 3.78552e-08, 1, 0.866025, 0.5, 0, -0.5, 0.866025, -4.37114e-08, 0.2, -0.470032, -0.3 )
+transform = Transform( -2.18557e-08, 3.78552e-08, 1, 0.866025, 0.5, 0, -0.5, 0.866025, -4.37114e-08, 0.2, -0.47264, -0.3 )
 script = ExtResource( 3 )
 
 [node name="Cube002" type="MeshInstance" parent="."]
@@ -153,5 +153,7 @@ collision_layer = 4
 transform = Transform( 1, 5.96046e-08, 4.44089e-16, -5.96046e-08, 1, -8.88178e-16, 1.42109e-14, -4.26326e-14, 1, 0, 0, 0 )
 shape = SubResource( 7 )
 disabled = true
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 
 [editable path="Hitbox"]

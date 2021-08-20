@@ -1,8 +1,8 @@
 extends Node
 
 
-func playAnimation() -> void:
-	$AnimationPlayer.play("Slash")
+func playAnimation(name) -> void:
+	$AnimationPlayer.play(name)
 	
 func activateCollision() -> void:
 	$Hitbox.get_child(0).set_disabled(false)
