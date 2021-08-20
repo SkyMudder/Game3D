@@ -1,18 +1,18 @@
 [gd_resource type="Resource" load_steps=3 format=2]
 
 [ext_resource path="res://Items/Item.gd" type="Script" id=1]
-[ext_resource path="res://Items/IronAxe.png" type="Texture" id=2]
+[ext_resource path="res://Items/Furnace.png" type="Texture" id=2]
 
 [resource]
 script = ExtResource( 1 )
-name = "Iron Axe"
+name = "Furnace"
 texture = ExtResource( 2 )
 amount = 1
 stackLimit = 1
-damageMultiplier = 1.5
-damageType = 0
-level = 2
-model = "res://Items/IronAxe.tscn"
+damageMultiplier = 0.0
+damageType = -1
+level = -1
+model = "res://Assets/OreFurnace.tscn"
 burningSpeed = 0.0
 smeltingSpeed = 0.0
-buildable = false
+buildable = true

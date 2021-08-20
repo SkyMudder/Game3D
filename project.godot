@@ -197,6 +197,7 @@ interact={
 3d_physics/layer_2="Tools"
 3d_physics/layer_3="Farmable"
 3d_physics/layer_4="Pickable"
+3d_physics/layer_5="Interactable"
 
 [physics]
 

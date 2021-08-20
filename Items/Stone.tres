@@ -13,3 +13,6 @@ damageMultiplier = 1.0
 damageType = 0
 level = 0
 model = "res://Items/RockSmallItem.tscn"
+burningSpeed = 0.0
+smeltingSpeed = 0.0
+buildable = false

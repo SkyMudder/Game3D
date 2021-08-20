@@ -13,3 +13,6 @@ damageMultiplier = 1.25
 damageType = 0
 level = 1
 model = "res://Items/StoneAxe.tscn"
+burningSpeed = 0.0
+smeltingSpeed = 0.0
+buildable = false

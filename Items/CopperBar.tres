@@ -1,0 +1,18 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://Items/CopperBar.png" type="Texture" id=1]
+[ext_resource path="res://Items/Item.gd" type="Script" id=2]
+
+[resource]
+script = ExtResource( 2 )
+name = "Copper Bar"
+texture = ExtResource( 1 )
+amount = 1
+stackLimit = 20
+damageMultiplier = 0.0
+damageType = -1
+level = -1
+model = ""
+burningSpeed = 0.0
+smeltingSpeed = 0.0
+buildable = false

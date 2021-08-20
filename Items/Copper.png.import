@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Wood.png-c88690420c5aee87329d0fa69d85273b.stex"
+path="res://.import/Copper.png-55e8f14ba61e82961b4224e5e300f8e6.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Items/Wood.png"
-dest_files=[ "res://.import/Wood.png-c88690420c5aee87329d0fa69d85273b.stex" ]
+source_file="res://Items/Copper.png"
+dest_files=[ "res://.import/Copper.png-55e8f14ba61e82961b4224e5e300f8e6.stex" ]
 
 [params]
 

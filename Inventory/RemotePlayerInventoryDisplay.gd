@@ -1,7 +1,7 @@
 extends "res://Inventory/InventoryDisplayMaster.gd"
 
 
-onready var InventorySlotDisplay : PackedScene = preload("res://Inventory/InventorySlotDisplay.tscn")
+onready var InventorySlotDisplay = preload("res://Inventory/InventorySlotDisplay.tscn")
 onready var inventory : Inventory = Inventories.playerInventory
 var currentlySelected : int = 1
 
@@ -20,7 +20,7 @@ func _ready():
 	# warning-ignore:return_value_discarded
 	inventory.connect("items_changed", self, "_on_items_changed")
 	
-func getSlot(index, _inventoryChanged) -> Node:
+func getSlot(index, _inventoryChanged):
 	return get_child(index)
 	
 """When Item changes, update the Inventory Slot Display"""

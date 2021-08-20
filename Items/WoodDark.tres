@@ -13,3 +13,6 @@ damageMultiplier = 0.0
 damageType = -1
 level = 1
 model = ""
+burningSpeed = 0.5
+smeltingSpeed = 0.0
+buildable = false

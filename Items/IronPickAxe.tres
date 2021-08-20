@@ -13,3 +13,6 @@ damageMultiplier = 1.5
 damageType = 1
 level = 2
 model = "res://Items/IronPickAxe.tscn"
+burningSpeed = 0.0
+smeltingSpeed = 0.0
+buildable = false

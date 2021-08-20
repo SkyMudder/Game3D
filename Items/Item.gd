@@ -9,3 +9,6 @@ export(float) var damageMultiplier
 export(int) var damageType
 export(int) var level
 export(String) var model
+export(float) var burningSpeed
+export(float) var smeltingSpeed
+export(bool) var buildable

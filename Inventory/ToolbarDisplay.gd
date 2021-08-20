@@ -31,6 +31,7 @@ func _ready():
 	inventory.add(preload("res://Items/StoneAxe.tres"))
 	inventory.add(preload("res://Items/IronPickAxe.tres"))
 	inventory.add(preload("res://Items/IronAxe.tres"))
+	inventory.add(preload("res://Items/Furnace.tres"))
 	
 """When Item changes, update the Inventory Slot Display"""
 func _on_items_changed(inventoryChanged, index) -> void:

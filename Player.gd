@@ -1,10 +1,16 @@
 extends KinematicBody
 
 
+signal stopped_placing
+
 onready var toolbar = get_node("ToolbarCenterContainer/InventoryDisplay")
-onready var raycast = get_node("Rotation_Helper/Camera/RayCast")
+onready var rayCast = get_node("Rotation_Helper/Camera/RayCast")
+onready var rayCastBuild = get_node("Rotation_Helper/Camera/RayCastBuild")
 onready var RockSmall = preload("res://Assets/RockSmall.tscn")
 
+var areaClear : bool = false
+
+var currentObject
 var playerItem : Item # The Item the Player has equipped
 var currentItem : Spatial # The 3D Model of the Item
 var previousItem : Spatial # The 3D Model of the previous Item
@@ -25,16 +31,20 @@ var rotation_helper : Spatial
 var MOUSE_SENSITIVITY : float = 0.05
 
 func _ready():
+	set_process(false)
 	toolbar.connect("item_switched", self, "switchItem")
 	camera = $Rotation_Helper/Camera
 	rotation_helper = $Rotation_Helper
 
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-
+	
+func _process(_delta):
+	placeObject()
+	
 func _physics_process(delta):
 	process_input(delta)
 	process_movement(delta)
-	var object = raycast.get_collider()
+	var object = rayCast.get_collider()
 	if object != null:
 		if object.pickable:
 			$PickUp.show()
@@ -144,7 +154,16 @@ func switchItem() -> void:
 	if previousItem != null:
 		previousItem.queue_free()
 	if playerItem != null:
-		if playerItem.model != "":
+		if playerItem.buildable:
+			var pos
+			if rayCastBuild.is_colliding():
+				print("FRRR")
+				pos = rayCastBuild.get_collision_point()
+			else:
+				pos = Vector3(0, 0, 0)
+			print(pos)
+			instancePlaceableObject(load(playerItem.model), pos)
+		elif playerItem.model != "":
 			var model
 			model = load(playerItem.model)
 			currentItem = model.instance()
@@ -155,3 +174,57 @@ func switchItem() -> void:
 	else:
 		previousItem = null
 	previousItem = currentItem
+	
+func blueprint(object) -> void:
+	#var pos = newRayCast()
+	#if pos.is_colliding():
+		#object.setBlueprintState(0)
+		#areaClear = false
+	#else:
+		#object.setBlueprintState(1)
+	areaClear = true
+	if rayCastBuild.is_colliding():
+		positionObject(object, rayCastBuild.get_collision_point())
+	
+"""Places an Object at a specific Position"""
+func positionObject(instance, position) -> void:
+	instance.translation = position
+	
+"""Instance a new Object, add it to the Scene Tree
+Show its Blueprint Texture which should be in the Scene"""
+func instancePlaceableObject(item, position) -> void:
+	set_process(true)
+	var newObject = item.instance()
+	get_node("/root/World").add_child(newObject)
+	positionObject(newObject, position)
+	newObject.setCollision(0)
+	currentObject = newObject
+	blueprint(currentObject)
+	
+"""Checks if the Player clicked LMB to place an object"""
+func checkPlaceObject() -> bool:
+	blueprint(currentObject)
+	if Input.is_mouse_button_pressed(BUTTON_LEFT) and !Input.is_action_pressed("ctrl") and areaClear:
+		return true
+	return false
+	
+"""Places an Object"""
+func placeObject() -> void:
+	if checkPlaceObject():
+		currentObject.setState(0)
+		currentObject.setCollision(1)
+		currentObject.add_to_group("Objects")
+		currentObject = null
+		rayCastBuild.queue_free()
+		emit_signal("stopped_placing", true)
+		
+"""Creates and returns a new RayCast with preferred Settings for Building Placement"""
+func newRayCast() -> RayCast:
+	var newRaycast = RayCast.new()
+	newRaycast.enabled = true
+	newRaycast.collide_with_areas = true
+	newRaycast.collide_with_bodies = false
+	newRaycast.collision_mask = 8
+	newRaycast.cast_to = Vector3(1, 1, 1)
+	get_node("/root/World").call_deferred("add_child", newRaycast)
+	return newRaycast
