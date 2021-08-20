@@ -52,9 +52,13 @@ func _process(_delta):
 """Set the Material using a Blueprint State"""
 func setBlueprintState(state) -> void:
 	if state == 0:
-		pass
+		for x in get_children():
+			if x is MeshInstance:
+				x.material_override = null
 	elif state == 1:
-		pass
+		for x in get_children():
+			if x is MeshInstance:
+				x.material_override = load("res://Assets/BluePrint.tres")
 	
 """Set the Materials using a Furnace State"""
 func setState(state) -> void:

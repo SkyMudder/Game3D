@@ -1,8 +1,6 @@
 extends KinematicBody
 
 
-signal stopped_placing
-
 onready var toolbar = get_node("ToolbarCenterContainer/InventoryDisplay")
 onready var rayCast = get_node("Rotation_Helper/Camera/RayCast")
 onready var rayCastBuild = get_node("Rotation_Helper/Camera/RayCastBuild")
@@ -38,8 +36,13 @@ func _ready():
 
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	
-func _process(_delta):
+"""Used for placing Objects and handling their Placement"""
+func _process(delta):
 	placeObject()
+	if Input.is_action_pressed("Q"):
+		currentObject.rotation_degrees.y += 200 * delta
+	elif Input.is_action_pressed("E"):
+		currentObject.rotation_degrees.y -= 200 * delta
 	
 func _physics_process(delta):
 	process_input(delta)
@@ -151,18 +154,21 @@ func _input(event):
 	
 """Switch the Item in the Player's hand"""
 func switchItem() -> void:
+	if currentObject != null:
+		currentObject.queue_free()
+		currentObject = null
+		rayCastBuild.enabled = false
+		set_process(false)
 	if previousItem != null:
 		previousItem.queue_free()
 	if playerItem != null:
 		if playerItem.buildable:
 			var pos
+			rayCastBuild.enabled = true
+			rayCastBuild.force_raycast_update()
 			if rayCastBuild.is_colliding():
-				print("FRRR")
 				pos = rayCastBuild.get_collision_point()
-			else:
-				pos = Vector3(0, 0, 0)
-			print(pos)
-			instancePlaceableObject(load(playerItem.model), pos)
+				instancePlaceableObject(load(playerItem.model), pos)
 		elif playerItem.model != "":
 			var model
 			model = load(playerItem.model)
@@ -176,19 +182,14 @@ func switchItem() -> void:
 	previousItem = currentItem
 	
 func blueprint(object) -> void:
-	#var pos = newRayCast()
-	#if pos.is_colliding():
-		#object.setBlueprintState(0)
-		#areaClear = false
-	#else:
-		#object.setBlueprintState(1)
+	object.setBlueprintState(1)
 	areaClear = true
 	if rayCastBuild.is_colliding():
 		positionObject(object, rayCastBuild.get_collision_point())
 	
 """Places an Object at a specific Position"""
 func positionObject(instance, position) -> void:
-	instance.translation = position
+	instance.translation = position + Vector3(0, -2, 0)
 	
 """Instance a new Object, add it to the Scene Tree
 Show its Blueprint Texture which should be in the Scene"""
@@ -211,12 +212,12 @@ func checkPlaceObject() -> bool:
 """Places an Object"""
 func placeObject() -> void:
 	if checkPlaceObject():
+		set_process(false)
 		currentObject.setState(0)
 		currentObject.setCollision(1)
-		currentObject.add_to_group("Objects")
+		currentObject.setBlueprintState(0)
 		currentObject = null
-		rayCastBuild.queue_free()
-		emit_signal("stopped_placing", true)
+		toolbar.inventory.remove(toolbar.currentlySelected)
 		
 """Creates and returns a new RayCast with preferred Settings for Building Placement"""
 func newRayCast() -> RayCast:
