@@ -55,6 +55,20 @@ surfaces/0 = {
 
 [sub_resource type="Animation" id=4]
 resource_name = "Idle"
+length = 2.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:translation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1, 2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0.2, -0.5, -0.3 ), Vector3( 0.2, -0.47, -0.3 ), Vector3( 0.2, -0.5, -0.3 ) ]
+}
 
 [sub_resource type="Animation" id=5]
 resource_name = "Slash"
@@ -105,7 +119,7 @@ tracks/2/keys = {
 extents = Vector3( 0.557575, 0.378036, 0.767035 )
 
 [node name="StonePickaxe" type="Spatial"]
-transform = Transform( 0.194652, -0.104036, 0.97534, 0.471369, 0.881935, 0, -0.860187, 0.459745, 0.22071, 0.15, -0.5, -0.3 )
+transform = Transform( -2.18557e-08, 3.78551e-08, 1, 0.866025, 0.5, 0, -0.5, 0.866025, -4.37114e-08, 0.2, -0.5, -0.3 )
 script = ExtResource( 2 )
 
 [node name="Cube" type="MeshInstance" parent="."]
