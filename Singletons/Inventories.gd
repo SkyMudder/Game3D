@@ -10,12 +10,12 @@ var currentFurnace: int = 0
 var itemID: int = -1
 
 var moving: bool = false
-var open: bool = false
 var unhandledData: Dictionary = {}
 
 var playerInventory: Inventory = Inventory.new(0, 24, 6)
 var toolbar: Inventory = Inventory.new(1, 10, 10)
 
+onready var playerInventoryUI: TabContainer = get_node("/root/World/Player/TabContainer")
 onready var playerInventories: Array = []
 onready var furnaceInventories: Array = []
 
@@ -76,3 +76,7 @@ func setUnhandledData(inventory, item, amount, index) -> void:
 func getItemID() -> int:
 	itemID += 1
 	return itemID
+	
+func hidePlayerUI() -> void:
+	playerInventoryUI.hide()
+	States.mainInventoryOpen = false

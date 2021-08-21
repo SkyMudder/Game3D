@@ -12,7 +12,6 @@ var areaClear: bool = false
 var currentObject: Spatial
 var playerItem: Item # The Item the Player has equipped
 var currentItem: Spatial # The 3D Model of the Item
-var previousItem: Spatial # The 3D Model of the previous Item
 const GRAVITY: float = -24.8
 var vel: Vector3 = Vector3()
 var MAX_SPEED: float = 8.0
@@ -100,28 +99,21 @@ func process_input(_delta) -> void:
 	# ----------------------------------
 	# Capturing/Freeing the cursor
 	if Input.is_action_just_pressed("ui_focus_next"):
-		if Input.get_mouse_mode() == Input.MOUSE_MODE_VISIBLE and States.inventoryOpen:
+		if States.mainInventoryOpen:
 			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-			States.inventoryOpen = false
-		elif Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED and !States.inventoryOpen:
-			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-			States.inventoryOpen = true
-		# ----------------------------------
-		# Showing/Hiding UI
-		if $TabContainer.visible:
+			States.mainInventoryOpen = false
 			$TabContainer.visible = false
-			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 		else:
+			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+			States.mainInventoryOpen = true
 			$TabContainer.visible = true
-		# ----------------------------------
 	# ----------------------------------
 	
-	# ----------------------------------
 	# Attacking
-	if Input.is_action_pressed("mouse_left") and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
+	if Input.is_action_pressed("mouse_left") and !States.inventoriesOpen():
 		if playerItem != null:
 			if playerItem.damageType != -1:
-				previousItem.playAnimation("Slash")
+				currentItem.playAnimation("Slash")
 	# ----------------------------------
 	
 func process_movement(delta) -> void:
@@ -163,8 +155,9 @@ func switchItem() -> void:
 		currentObject = null
 		rayCastBuild.enabled = false
 		set_process(false)
-	elif previousItem != null:
-		previousItem.queue_free()
+	elif currentItem != null:
+		currentItem.queue_free()
+		currentItem = null
 	if playerItem != null:
 		if playerItem.buildable:
 			var pos: Vector3 = Vector3.ZERO
@@ -177,12 +170,6 @@ func switchItem() -> void:
 			var model: PackedScene = load(playerItem.model)
 			currentItem = model.instance()
 			$Rotation_Helper/Camera.add_child(currentItem)
-			previousItem = currentItem
-			currentItem = null
-			return
-	else:
-		previousItem = null
-	previousItem = currentItem
 	
 func blueprint(object: Object) -> void:
 	object.setBlueprintState(1)

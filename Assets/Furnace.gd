@@ -6,7 +6,6 @@ signal ready_to_remove
 onready var collision: CollisionShape = get_node("CollisionShape")
 onready var ui: GridContainer = get_node("FurnaceView")
 onready var fuelProgress: ProgressBar = get_node("FurnaceView/FurnaceHBoxContainer/InventoryVBoxContainer/FuelHBoxContainer/Fuel")
-
 var queue: Array = []
 var productItems: Array
 
@@ -246,26 +245,27 @@ func _on_queue_updated(itemIndex: int, flag: int) -> void:
 	else:
 		queue.erase(itemIndex)
 	
-"""For closing the Furnace Inventory when opening the Main Inventory
-Or right Clicking anywhere"""
-func _input(_event) -> void:
-	if Input.is_action_just_pressed("ui_focus_next") or Input.is_action_just_pressed("mouse_right") or Input.is_action_just_pressed("ui_cancel"):
-		ui.hide()
-		States.inventoryOpen = false
-		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+# warning-ignore:unused_argument
+func _input(event: InputEvent) -> void:
+	if Input.is_action_just_pressed("ui_focus_next") and !States.mainInventoryOpen:
+		if ui.visible:
+			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+			ui.hide()
+			States.secondaryInventoryOpen = false
 	
 """Handles the Furnace Input"""
 func handleUI() -> void:
 	# Toggle the Furnace UI Visibility
-	if Input.is_action_just_pressed("interact"):
+	if Input.is_action_just_pressed("interact") or Input.is_action_just_pressed("ui_focus_next"):
 		if ui.visible:
 			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 			ui.hide()
-			States.inventoryOpen = false
+			States.secondaryInventoryOpen = false
 		else:
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 			ui.show()
-			States.inventoryOpen = true
+			Inventories.hidePlayerUI()
+			States.secondaryInventoryOpen = true
 	# Deactivate the Furnace's Collision, remove the Texture and hide the UI
 	# Add the Furnace and the Items inside it to the Player Inventory
 	# The Furnace Node will be removed once all its Operations are finished

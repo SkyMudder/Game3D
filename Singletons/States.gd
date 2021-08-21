@@ -1,4 +1,8 @@
 extends Node
 
-var inventoryOpen: bool = false
+var mainInventoryOpen: bool = false
+var secondaryInventoryOpen: bool = false
 var zooming: bool = false
+
+func inventoriesOpen() -> bool:
+	return mainInventoryOpen or secondaryInventoryOpen
