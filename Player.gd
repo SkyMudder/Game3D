@@ -99,14 +99,17 @@ func process_input(_delta):
 	# ----------------------------------
 	# Capturing/Freeing the cursor
 	if Input.is_action_just_pressed("ui_focus_next"):
-		if Input.get_mouse_mode() == Input.MOUSE_MODE_VISIBLE:
+		if Input.get_mouse_mode() == Input.MOUSE_MODE_VISIBLE and States.inventoryOpen:
 			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-		else:
+			States.inventoryOpen = false
+		elif Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED and !States.inventoryOpen:
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+			States.inventoryOpen = true
 		# ----------------------------------
 		# Capturing/Freeing the cursor
 		if $TabContainer.visible:
 			$TabContainer.visible = false
+			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 		else:
 			$TabContainer.visible = true
 		# ----------------------------------
@@ -186,6 +189,8 @@ func blueprint(object) -> void:
 	areaClear = true
 	if rayCastBuild.is_colliding():
 		positionObject(object, rayCastBuild.get_collision_point())
+	else:
+		positionObject(object, $Rotation_Helper/Camera.translation)
 	
 """Places an Object at a specific Position"""
 func positionObject(instance, position) -> void:

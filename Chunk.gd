@@ -17,7 +17,6 @@ var Grass : PackedScene = preload("res://Assets/Grass.tscn")
 var RawIronRock : PackedScene = preload("res://Assets/IronRock.tscn")
 var RawCoalRock : PackedScene = preload("res://Assets/CoalRock.tscn")
 var RockSmall : PackedScene = preload("res://Assets/RockSmall.tscn")
-var Furnace : PackedScene = preload("res://Assets/OreFurnace.tscn")
 
 func _init(terrainNoise, objectNoise, chunkX, chunkZ, chunkSize):
 	self.noise = terrainNoise
@@ -52,10 +51,6 @@ func generateChunk() -> void:
 		vertex.y = noise.get_noise_2d(vertex.x + x, vertex.z + z) * 30
 		
 		meshDataTool.set_vertex(i, vertex)
-		if i == 0 and z == 0 and x == 0:
-			var f = Furnace.instance()
-			f.translation = vertex
-			add_child(f)
 		if i % 2 == 0:
 			var objSpawns = noiseObj.get_noise_2d(vertex.x + x, vertex.z + z) * 6 + 3
 			if vertex.y > 2:

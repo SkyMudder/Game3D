@@ -250,6 +250,8 @@ Or right Clicking anywhere"""
 func _input(_event):
 	if Input.is_action_just_pressed("ui_focus_next") or Input.is_action_just_pressed("mouse_right") or Input.is_action_just_pressed("ui_cancel"):
 		ui.hide()
+		States.inventoryOpen = false
+		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	
 """Handles the Furnace Input"""
 func handleUI():
@@ -258,9 +260,11 @@ func handleUI():
 		if ui.visible:
 			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 			ui.hide()
+			States.inventoryOpen = false
 		else:
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 			ui.show()
+			States.inventoryOpen = true
 	# Deactivate the Furnace's Collision, remove the Texture and hide the UI
 	# Add the Furnace and the Items inside it to the Player Inventory
 	# The Furnace Node will be removed once all its Operations are finished
@@ -275,6 +279,7 @@ func handleUI():
 			setCollision(0)
 			setState(-1)
 			ui.hide()
+			States.inventoryOpen = false
 	
 # Destroy the Furnace
 func _on_ready_to_remove():

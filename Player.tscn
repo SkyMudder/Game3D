@@ -36,7 +36,7 @@ collide_with_bodies = false
 
 [node name="RayCastBuild" type="RayCast" parent="Rotation_Helper/Camera"]
 exclude_parent = false
-cast_to = Vector3( 0, 0, -10 )
+cast_to = Vector3( 0, 0, -5 )
 collide_with_areas = true
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
