@@ -1,6 +1,8 @@
 extends KinematicBody
 
 
+signal stopped_placing
+
 onready var toolbar: GridContainer = get_node("ToolbarCenterContainer/InventoryDisplay")
 onready var rayCast: RayCast = get_node("Rotation_Helper/Camera/RayCast")
 onready var rayCastBuild: RayCast = get_node("Rotation_Helper/Camera/RayCastBuild")
@@ -161,16 +163,16 @@ func switchItem() -> void:
 		currentObject = null
 		rayCastBuild.enabled = false
 		set_process(false)
-	if previousItem != null:
+	elif previousItem != null:
 		previousItem.queue_free()
 	if playerItem != null:
 		if playerItem.buildable:
-			var pos: Vector3
+			var pos: Vector3 = Vector3.ZERO
 			rayCastBuild.enabled = true
 			rayCastBuild.force_raycast_update()
 			if rayCastBuild.is_colliding():
 				pos = rayCastBuild.get_collision_point()
-				instancePlaceableObject(load(playerItem.model), pos)
+			instancePlaceableObject(load(playerItem.model), pos)
 		elif playerItem.model != "":
 			var model: PackedScene = load(playerItem.model)
 			currentItem = model.instance()
@@ -208,7 +210,7 @@ func instancePlaceableObject(object: PackedScene, position: Vector3) -> void:
 """Checks if the Player clicked LMB to place an object"""
 func checkPlaceObject() -> bool:
 	blueprint(currentObject)
-	if Input.is_mouse_button_pressed(BUTTON_LEFT) and !Input.is_action_pressed("ctrl") and areaClear:
+	if Input.is_mouse_button_pressed(BUTTON_LEFT) and !Input.is_action_pressed("ctrl") and rayCastBuild.is_colliding() and areaClear:
 		return true
 	return false
 	
@@ -221,6 +223,7 @@ func placeObject() -> void:
 		currentObject.setBlueprintState(0)
 		currentObject = null
 		toolbar.inventory.remove(toolbar.currentlySelected)
+		emit_signal("stopped_placing")
 		
 """Creates and returns a new RayCast with preferred Settings for Building Placement"""
 func newRayCast() -> RayCast:

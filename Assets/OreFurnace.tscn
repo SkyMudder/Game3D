@@ -130,8 +130,6 @@ height = 1.60974
 
 [node name="OreFurnace" type="StaticBody"]
 input_ray_pickable = false
-collision_layer = 0
-collision_mask = 0
 script = ExtResource( 7 )
 
 [node name="Cylinder004" type="MeshInstance" parent="."]
@@ -174,6 +172,10 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.820117, -0.19076 )
 shape = SubResource( 8 )
 
 [node name="FurnaceView" parent="." instance=ExtResource( 4 )]
+margin_left = 459.0
+margin_top = 273.0
+margin_right = 733.0
+margin_bottom = 386.0
 
 [node name="Hurtbox" parent="." instance=ExtResource( 8 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.854809, -0.115203 )

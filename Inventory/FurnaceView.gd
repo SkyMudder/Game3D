@@ -10,13 +10,14 @@ onready var productInventory: Inventory = Inventories.furnaceInventories[localFu
 onready var sourceContainer: HBoxContainer = get_node("FurnaceHBoxContainer/InventoryVBoxContainer/SourceHBoxContainer")
 onready var productContainer: HBoxContainer = get_node("FurnaceHBoxContainer/InventoryVBoxContainer/ProductHBoxContainer")
 onready var furnace: Spatial = get_parent().get_parent()
+onready var player: KinematicBody = get_node("/root/World/Player")
 
 """Adds the given Amount of Inventory Slots to the UI
 Connects Signal for when Items changed
 Updates the Inventory on the UI"""
 func _ready() -> void:
-	pass
-	#groundLayer.connect("stopped_placing", self, "_on_stopped_placing")
+	# warning-ignore:return_value_discarded
+	player.connect("stopped_placing", self, "_on_stopped_placing")
 	
 """When Item changes, update the Inventory Slot Display"""
 func _on_items_changed(inventoryChanged: int, index: int) -> void:
@@ -46,19 +47,18 @@ func getSlot(index: int, inventoryChanged: int):
 """Adds the given Amount of Inventory Slots to the UI
 Connects Signal for when Items changed
 Updates the Inventory on the UI"""
-func _on_stopped_placing(placed: bool) -> void:
-	if placed:
-		addInventorySlotsFurnace(sourceInventory, sourceContainer, sourceInventory.size)
-		addInventorySlotsFurnace(productInventory, productContainer, productInventory.size)
-		columns = sourceInventory.columns
-		for x in sourceContainer.get_children():
-			x.inventory = sourceInventory
-		for x in productContainer.get_children():
-			x.inventory = productInventory
-		updateInventoryDisplay(self, sourceInventory, sourceInventory.id)
-		updateInventoryDisplay(self, productInventory, productInventory.id)
-		# warning-ignore:return_value_discarded
-		sourceInventory.connect("items_changed", self, "_on_items_changed")
-		# warning-ignore:return_value_discarded
-		productInventory.connect("items_changed", self, "_on_items_changed")
-	#groundLayer.disconnect("stopped_placing", self, "_on_stopped_placing")
+func _on_stopped_placing() -> void:
+	addInventorySlotsFurnace(sourceInventory, sourceContainer, sourceInventory.size)
+	addInventorySlotsFurnace(productInventory, productContainer, productInventory.size)
+	columns = sourceInventory.columns
+	for x in sourceContainer.get_children():
+		x.inventory = sourceInventory
+	for x in productContainer.get_children():
+		x.inventory = productInventory
+	updateInventoryDisplay(self, sourceInventory, sourceInventory.id)
+	updateInventoryDisplay(self, productInventory, productInventory.id)
+	# warning-ignore:return_value_discarded
+	sourceInventory.connect("items_changed", self, "_on_items_changed")
+	# warning-ignore:return_value_discarded
+	productInventory.connect("items_changed", self, "_on_items_changed")
+	player.disconnect("stopped_placing", self, "_on_stopped_placing")

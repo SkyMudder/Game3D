@@ -28,6 +28,7 @@ Meaning Collisions and UI are deactivated"""
 func _ready() -> void:
 	set_process(false)
 	ui.hide()
+	# warning-ignore:return_value_discarded
 	ui.connect("queue_updated", self, "_on_queue_updated")
 	productItems = ui.productInventory.items
 	previousCollisionShape = collision.shape
@@ -82,7 +83,7 @@ func setCollision(state: int) -> void:
 Or until the Stack has no Items"""
 func burn() -> void:
 	var sourceItems: Array = ui.sourceInventory.items
-	var index: int = findBurnable()	# First Slot with a burnable Item
+	var index = findBurnable()	# First Slot with a burnable Item
 	if index != null:	# Only burn if an Item was found
 		currentlyBurning = true
 		# Only burn if there is enough Space for Fuel
@@ -102,7 +103,7 @@ func burn() -> void:
 				# Set the new Item Value on the UI unless the Amount is 0
 				# Then the Item gets removed from the Inventory
 				if sourceItems[index].amount > 0:
-					ui.sourceInventory.set(sourceItems[index], index)
+					ui.sourceInventory.setItem(sourceItems[index], index)
 				else:
 					ui.sourceInventory.remove(index)
 		currentlyBurning = false
@@ -117,8 +118,8 @@ Does not have its value incremented when put in the Product Inventory
 """
 func smelt() -> void:
 	var sourceItems: Array = ui.sourceInventory.items
-	var targetItems: Array= ui.productInventory.items
-	var index: int = findSmeltable()
+	var targetItems: Array = ui.productInventory.items
+	var index = findSmeltable()
 	# Check if there is enough Fuel and a smeltable Item was found
 	if index != null:
 		# Get the Source Item and determine what the Product is
@@ -155,13 +156,13 @@ func smeltUpdateValues(sourceItem: Item, index: int, targetItem: Item, item: Ite
 	# Else, increment its Value
 	# Set the Items
 	if targetItem == null:
-		ui.productInventory.set(item.duplicate(), 0)
+		ui.productInventory.setItem(item.duplicate(), 0)
 	else:
 		item = targetItem
 		item.amount += 1
-		ui.productInventory.set(item, 0)
+		ui.productInventory.setItem(item, 0)
 	# Set the Source Item, as its Value was decremented earlier
-	ui.sourceInventory.set(sourceItem, index)
+	ui.sourceInventory.setItem(sourceItem, index)
 	
 """Return the first burnable Item Index found in the Queue
 If no Item is found, null is returned"""
@@ -181,7 +182,7 @@ func findSmeltable():
 Returns a Boolean"""
 func checkBurnable(item: Item) -> bool:
 	if item != null:
-		if item.burnable:
+		if item.burningSpeed > 0:
 			return true
 	return false
 	
@@ -189,7 +190,7 @@ func checkBurnable(item: Item) -> bool:
 Returns a Boolean"""
 func checkSmeltable(item: Item) -> bool:
 	if item != null:
-		if item.smeltable:
+		if item.smeltingSpeed > 0:
 			return true
 	return false
 	
@@ -270,16 +271,17 @@ func handleUI() -> void:
 	# The Furnace Node will be removed once all its Operations are finished
 	if Input.is_action_just_pressed("interact"):
 		if Input.is_action_pressed("ctrl"):
+			pass
 			# warning-ignore:return_value_discarded
-			connect("ready_to_remove", self, "_on_ready_to_remove")
-			queuedForRemoval = true
-			Inventories.playerInventory.add(preload("res://Items/Furnace.tres"))
-			getFurnaceItems(ui.sourceInventory)
-			getFurnaceItems(ui.productInventory)
-			setCollision(0)
-			setState(-1)
-			ui.hide()
-			States.inventoryOpen = false
+#			connect("ready_to_remove", self, "_on_ready_to_remove")
+#			queuedForRemoval = true
+#			Inventories.playerInventory.add(preload("res://Items/Furnace.tres"))
+#			getFurnaceItems(ui.sourceInventory)
+#			getFurnaceItems(ui.productInventory)
+#			setCollision(0)
+#			setState(-1)
+#			ui.hide()
+#			States.inventoryOpen = false
 	
 # Destroy the Furnace
 func _on_ready_to_remove() -> void:

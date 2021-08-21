@@ -27,6 +27,7 @@ func _ready() -> void:
 		x.connect("slot_updated", self, "_on_slot_updated")
 	for _x in range(30):
 		inventory.add(preload("res://Items/Wood.tres"))
+		inventory.add(preload("res://Items/Copper.tres"))
 	inventory.add(preload("res://Items/StonePickAxe.tres"))
 	inventory.add(preload("res://Items/StoneAxe.tres"))
 	inventory.add(preload("res://Items/IronPickAxe.tres"))

@@ -12,3 +12,4 @@ export(String) var model
 export(float) var burningSpeed
 export(float) var smeltingSpeed
 export(bool) var buildable
+export(Resource) var smeltingProduct
