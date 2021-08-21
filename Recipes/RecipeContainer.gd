@@ -3,19 +3,19 @@ extends HBoxContainer
 
 signal recipe_selected(index)
 
-onready var selected = $Selected
-onready var itemTexture = $ItemTexture
+onready var selected: Sprite = $Selected
+onready var itemTexture: TextureRect = $ItemTexture
 
-onready var ingredientTextures = get_node("IngredientsAmount/Ingredients")
-onready var ingredientNames = get_node("IngredientsAmount/IngredientNames")
-onready var ingredientAmounts = get_node("IngredientsAmount/Amounts")
+onready var ingredientTextures: VBoxContainer = get_node("IngredientsAmount/Ingredients")
+onready var ingredientNames: VBoxContainer = get_node("IngredientsAmount/IngredientNames")
+onready var ingredientAmounts: VBoxContainer = get_node("IngredientsAmount/Amounts")
 
-onready var description = get_node("IngredientsAmount/Description/Description")
+onready var description: Label = get_node("IngredientsAmount/Description/Description")
 
-var item
+var item: Resource
 
 """Sets all the Recipe Information on the UI"""
-func _ready():
+func _ready() -> void:
 	if item != null:
 		setTextures()
 		setNames()
@@ -48,7 +48,7 @@ func select() -> void:
 func deselect() -> void:
 	selected.hide()
 	
-func _on_RecipeContainer_gui_input(_event):
+func _on_RecipeContainer_gui_input(_event) -> void:
 	if Input.is_action_just_pressed("mouse_left"):
 		select()
 		emit_signal("recipe_selected", get_index())

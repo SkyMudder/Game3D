@@ -74,15 +74,15 @@ surfaces/0 = {
 [sub_resource type="CylinderShape" id=5]
 height = 2.48324
 
-[sub_resource type="CylinderShape" id=8]
+[sub_resource type="CylinderShape" id=6]
 radius = 0.934205
 height = 1.36942
 
-[sub_resource type="CapsuleShape" id=6]
+[sub_resource type="CapsuleShape" id=7]
 radius = 5.07725
 height = 0.002
 
-[sub_resource type="BoxShape" id=7]
+[sub_resource type="BoxShape" id=8]
 
 [node name="StaticBody" type="StaticBody"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.07128, 0 )
@@ -114,18 +114,18 @@ shape = SubResource( 5 )
 
 [node name="CollisionShape2" type="CollisionShape" parent="."]
 transform = Transform( 2.02775, -4.42615e-10, 0, 1.47232e-10, 1.51765, 0, 0, 0, 2.101, 0.128, 0.069, 0 )
-shape = SubResource( 8 )
+shape = SubResource( 6 )
 
 [node name="CollisionShape3" type="CollisionShape" parent="."]
 transform = Transform( 0.2, -4.36558e-11, 0, 2.91038e-11, 0.3, 0, 0, 0, 0.2, 0.127861, 3.44253, 0 )
-shape = SubResource( 6 )
+shape = SubResource( 7 )
 
 [node name="Hurtbox" parent="." instance=ExtResource( 6 )]
 transform = Transform( 1.5, 0, 0, 0, 4, 0, 0, 0, 1.5, 0, 0.854622, 0 )
 collision_mask = 4
 
 [node name="CollisionShape" parent="Hurtbox" index="0"]
-shape = SubResource( 7 )
+shape = SubResource( 8 )
 
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 

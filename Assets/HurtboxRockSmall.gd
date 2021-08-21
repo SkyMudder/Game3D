@@ -1,8 +1,8 @@
 extends Area
 
-var pickable = true
-var minable = false
-var choppable = false
+var pickable: bool = true
+var minable: bool = false
+var choppable: bool = false
 
-func interact():
+func interact() -> void:
 	get_parent()._on_interact()

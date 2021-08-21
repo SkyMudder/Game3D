@@ -1,35 +1,35 @@
 extends KinematicBody
 
 
-onready var toolbar = get_node("ToolbarCenterContainer/InventoryDisplay")
-onready var rayCast = get_node("Rotation_Helper/Camera/RayCast")
-onready var rayCastBuild = get_node("Rotation_Helper/Camera/RayCastBuild")
-onready var RockSmall = preload("res://Assets/RockSmall.tscn")
+onready var toolbar: GridContainer = get_node("ToolbarCenterContainer/InventoryDisplay")
+onready var rayCast: RayCast = get_node("Rotation_Helper/Camera/RayCast")
+onready var rayCastBuild: RayCast = get_node("Rotation_Helper/Camera/RayCastBuild")
 
-var areaClear : bool = false
+var areaClear: bool = false
 
-var currentObject
-var playerItem : Item # The Item the Player has equipped
-var currentItem : Spatial # The 3D Model of the Item
-var previousItem : Spatial # The 3D Model of the previous Item
-const GRAVITY : float = -24.8
-var vel : Vector3 = Vector3()
-var MAX_SPEED : float = 8.0
-const JUMP_SPEED : float = 10.0
-const ACCEL : float = 4.5
+var currentObject: Spatial
+var playerItem: Item # The Item the Player has equipped
+var currentItem: Spatial # The 3D Model of the Item
+var previousItem: Spatial # The 3D Model of the previous Item
+const GRAVITY: float = -24.8
+var vel: Vector3 = Vector3()
+var MAX_SPEED: float = 8.0
+const JUMP_SPEED: float = 10.0
+const ACCEL: float = 4.5
 
-var dir : Vector3 = Vector3()
+var dir: Vector3 = Vector3()
 
-const DEACCEL= 16
-const MAX_SLOPE_ANGLE = 40
+const DEACCEL: int = 16
+const MAX_SLOPE_ANGLE: int = 40
 
-var camera : Camera
-var rotation_helper : Spatial
+var camera: Camera
+var rotation_helper: Spatial
 
-var MOUSE_SENSITIVITY : float = 0.05
+var MOUSE_SENSITIVITY: float = 0.05
 
-func _ready():
+func _ready() -> void:
 	set_process(false)
+	# warning-ignore:return_value_discarded
 	toolbar.connect("item_switched", self, "switchItem")
 	camera = $Rotation_Helper/Camera
 	rotation_helper = $Rotation_Helper
@@ -37,14 +37,14 @@ func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	
 """Used for placing Objects and handling their Placement"""
-func _process(delta):
+func _process(delta) -> void:
 	placeObject()
 	if Input.is_action_pressed("Q"):
 		currentObject.rotation_degrees.y += 200 * delta
 	elif Input.is_action_pressed("E"):
 		currentObject.rotation_degrees.y -= 200 * delta
 	
-func _physics_process(delta):
+func _physics_process(delta) -> void:
 	process_input(delta)
 	process_movement(delta)
 	var object = rayCast.get_collider()
@@ -56,8 +56,7 @@ func _physics_process(delta):
 	else:
 		$PickUp.hide()
 
-func process_input(_delta):
-
+func process_input(_delta) -> void:
 	# ----------------------------------
 	# Walking
 	dir = Vector3()
@@ -106,7 +105,7 @@ func process_input(_delta):
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 			States.inventoryOpen = true
 		# ----------------------------------
-		# Capturing/Freeing the cursor
+		# Showing/Hiding UI
 		if $TabContainer.visible:
 			$TabContainer.visible = false
 			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -123,7 +122,7 @@ func process_input(_delta):
 				previousItem.playAnimation("Slash")
 	# ----------------------------------
 	
-func process_movement(delta):
+func process_movement(delta) -> void:
 	dir.y = 0
 	dir = dir.normalized()
 
@@ -146,12 +145,12 @@ func process_movement(delta):
 	vel.z = hvel.z
 	vel = move_and_slide(vel, Vector3(0, 1, 0), 0.05, 4, deg2rad(MAX_SLOPE_ANGLE))
 
-func _input(event):
+func _input(event) -> void:
 	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 		rotation_helper.rotate_x(deg2rad(event.relative.y * MOUSE_SENSITIVITY * -1))
 		self.rotate_y(deg2rad(event.relative.x * MOUSE_SENSITIVITY * -1))
 
-		var camera_rot = rotation_helper.rotation_degrees
+		var camera_rot: Vector3 = rotation_helper.rotation_degrees
 		camera_rot.x = clamp(camera_rot.x, -70, 70)
 		rotation_helper.rotation_degrees = camera_rot
 	
@@ -166,15 +165,14 @@ func switchItem() -> void:
 		previousItem.queue_free()
 	if playerItem != null:
 		if playerItem.buildable:
-			var pos
+			var pos: Vector3
 			rayCastBuild.enabled = true
 			rayCastBuild.force_raycast_update()
 			if rayCastBuild.is_colliding():
 				pos = rayCastBuild.get_collision_point()
 				instancePlaceableObject(load(playerItem.model), pos)
 		elif playerItem.model != "":
-			var model
-			model = load(playerItem.model)
+			var model: PackedScene = load(playerItem.model)
 			currentItem = model.instance()
 			$Rotation_Helper/Camera.add_child(currentItem)
 			previousItem = currentItem
@@ -184,7 +182,7 @@ func switchItem() -> void:
 		previousItem = null
 	previousItem = currentItem
 	
-func blueprint(object) -> void:
+func blueprint(object: Object) -> void:
 	object.setBlueprintState(1)
 	areaClear = true
 	if rayCastBuild.is_colliding():
@@ -193,14 +191,14 @@ func blueprint(object) -> void:
 		positionObject(object, $Rotation_Helper/Camera.translation)
 	
 """Places an Object at a specific Position"""
-func positionObject(instance, position) -> void:
+func positionObject(instance, position: Vector3) -> void:
 	instance.translation = position + Vector3(0, -2, 0)
 	
 """Instance a new Object, add it to the Scene Tree
 Show its Blueprint Texture which should be in the Scene"""
-func instancePlaceableObject(item, position) -> void:
+func instancePlaceableObject(object: PackedScene, position: Vector3) -> void:
 	set_process(true)
-	var newObject = item.instance()
+	var newObject = object.instance()
 	get_node("/root/World").add_child(newObject)
 	positionObject(newObject, position)
 	newObject.setCollision(0)

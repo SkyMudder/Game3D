@@ -1,8 +1,7 @@
 extends Area
 
 
-var pickable = true
+var pickable: bool = true
 
-
-func interact():
+func interact() -> void:
 	get_parent().handleUI()

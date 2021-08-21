@@ -4,15 +4,15 @@ extends "res://Inventory/InventoryDisplayMaster.gd"
 signal item_switched(flag)	# Flag: 0 if the Player Item should be updated
 							# Flag: 1 if the Building Object should be updated
 
-onready var InventorySlotDisplay = preload("res://Inventory/InventorySlotDisplay.tscn")
-onready var inventory : Inventory = Inventories.toolbar
+onready var InventorySlotDisplay: PackedScene = preload("res://Inventory/InventorySlotDisplay.tscn")
+onready var inventory: Inventory = Inventories.toolbar
 
-var currentlySelected : int = 9
+var currentlySelected: int = 9
 
 """Adds the given Amount of Inventory Slots to the UI
 Connects Signal for when Items changed
 Updates the Inventory on the UI"""
-func _ready():
+func _ready() -> void:
 	inventory.playerInventories = Inventories.playerInventories
 	addInventorySlots(self, inventory.size)
 	columns = inventory.columns
@@ -40,7 +40,7 @@ func _on_items_changed(inventoryChanged, index) -> void:
 		updateInventorySlotDisplay(self, inventory, inventoryChanged, index)
 	
 """Update Slots when a new Slot is selected"""
-func _input(event) -> void:
+func _input(event : InputEvent) -> void:
 	if event.is_action_pressed("scroll_up") and canSwitchSlot():
 		get_child(currentlySelected).deselect()
 		if !(currentlySelected - 1 < 0):
@@ -60,7 +60,7 @@ func _input(event) -> void:
 	selectSlotByNumber(event)
 	
 """Selects the Slot by the number pressed"""
-func selectSlotByNumber(event) -> void:
+func selectSlotByNumber(event : InputEvent) -> void:
 	if event.is_action_pressed("1") and !Inventories.open:
 		get_child(currentlySelected).deselect()
 		get_child(0).select()
@@ -102,7 +102,7 @@ func selectSlotByNumber(event) -> void:
 		get_child(9).select()
 		currentlySelected = 9
 	
-func getSlot(index, _inventoryChanged):
+func getSlot(index: int, _inventoryChanged) -> Node:
 	return get_child(index)
 	
 """Checks if the Slot can be switched"""
@@ -113,6 +113,6 @@ func canSwitchSlot() -> bool:
 	
 """For updating the Player Item
 When an Item is placed in an already selected Slot"""
-func _on_slot_updated(index):
+func _on_slot_updated(index: int) -> void:
 	get_child(index).select()
 	emit_signal("item_switched")

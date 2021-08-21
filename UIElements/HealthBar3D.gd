@@ -1,10 +1,10 @@
 extends Sprite3D
 
 
-onready var bar = $Viewport/TextureProgress
+onready var bar: TextureProgress = $Viewport/TextureProgress
 
-func _ready():
+func _ready() -> void:
 	texture = $Viewport.get_texture()
 	
-func update(hp) -> void:
+func update(hp: int) -> void:
 	bar.value = hp

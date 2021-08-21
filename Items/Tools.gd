@@ -1,7 +1,7 @@
 extends Node
 
 
-func playAnimation(name) -> void:
+func playAnimation(name : String) -> void:
 	$AnimationPlayer.play(name)
 	
 func activateCollision() -> void:

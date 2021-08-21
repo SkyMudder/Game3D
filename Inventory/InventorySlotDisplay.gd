@@ -3,20 +3,20 @@ extends CenterContainer
 
 signal slot_updated(index)
 
-onready var playerInventories : Array = Inventories.playerInventories
-var inventory : Inventory
-onready var player = get_node("/root/World/Player")
+onready var playerInventories: Array = Inventories.playerInventories
+var inventory: Inventory
+onready var player: KinematicBody = get_node("/root/World/Player")
 
-onready var textureRect = get_node("Item")
-onready var itemAmount = get_node("Item/ItemAmount")
-onready var emptySlotTexture = preload("res://UIElements/EmptyInventorySlot.png")
-onready var selected = get_node("Selected")
+onready var textureRect: TextureRect = get_node("Item")
+onready var itemAmount: Label = get_node("Item/ItemAmount")
+onready var emptySlotTexture: Resource = preload("res://UIElements/EmptyInventorySlot.png")
+onready var selected: Sprite = get_node("Selected")
 onready var furnaceView = get_parent().get_parent().get_parent()
 
 """Shows a given Item on the UI
-If the Amount is lower than 0 it gets set to null
+If the Amount is lower than 0 it gets setItem to null
 If the Stack only has one Item, the Amount is not shown on the UI"""
-func displayItem(inventoryDisplay, item) -> void:
+func displayItem(inventoryDisplay: Inventory, item: Item) -> void:
 	if item is Item and item.amount > 0:
 		textureRect.texture = item.texture
 		itemAmount.text = str(item.amount)
@@ -31,10 +31,10 @@ func displayItem(inventoryDisplay, item) -> void:
 		emit_signal("slot_updated", get_index())
 	
 func get_drag_data(_position) -> Dictionary:
-	var itemIndex = get_index()
-	var item = inventory.items[itemIndex]
-	var dragPreview
-	var data = {}
+	var itemIndex: int = get_index()
+	var item: Item = inventory.items[itemIndex]
+	var dragPreview: TextureRect
+	var data: Dictionary = {}
 	if item != null:
 		# Notify specific Objects that an Item has been picked up
 		# so they stop working
@@ -69,20 +69,21 @@ func get_drag_data(_position) -> Dictionary:
 				return data
 	return data
 	
-func can_drop_data(_position, data) -> bool:
+func can_drop_data(_position, data: Dictionary) -> bool:
 	return data is Dictionary and data.has("item")
 	
-func drop_data(_position, data) -> void:
-	var itemIndex = get_index()
-	var item = inventory.items[itemIndex]
-	var tmpInventory = Inventories.getFurnaceInventoryByID(data.id)
+func drop_data(_position, data: Dictionary) -> void:
+	var itemIndex: int = get_index()
+	var item: Item = inventory.items[itemIndex]
+	var tmpInventory: Inventory = Inventories.getFurnaceInventoryByID(data.id)
 	# Check if the Source is an Item and if it is of the same Type
 	if item is Item and item.name == data.item.name:
 		# Check if the Source Slot is the same as the Target Slot
 		# The Item will not be moved and will restore it's previous Value
 		if itemIndex == data.itemIndex and inventory.id == tmpInventory.id:
 			item.amount = data.previousAmount
-			inventory.set(item, itemIndex)
+			# warning-ignore:return_value_discarded
+			inventory.setItem(item, itemIndex)
 			# Notify specific Objects that an Item has been dropped
 			# so they can continue working
 			if tmpInventory != null:
@@ -94,7 +95,7 @@ func drop_data(_position, data) -> void:
 		# Check if the items are of the same Type
 		# And if the Source Stack has been split
 		if item.name == data.item.name and !data.has("split"):
-			var space = item.stackLimit - item.amount
+			var space: int = item.stackLimit - item.amount
 			# Check if the split Stack has enough Space to be merged
 			# With the new Stack
 			if item.amount + data.item.amount < item.stackLimit:
@@ -106,7 +107,7 @@ func drop_data(_position, data) -> void:
 				data.item.amount -= space
 		# Check if the Source Item Stack was Split and had an uneven number
 		elif data.has("split") and data.item.name == item.name:
-			var space = item.stackLimit - item.amount
+			var space: int = item.stackLimit - item.amount
 			# Check if the split Stack has enough Space to be merged
 			# With the new Stack
 			if item.amount + data.item.amount < item.stackLimit:
@@ -119,8 +120,10 @@ func drop_data(_position, data) -> void:
 			else:
 				item.amount += space
 				data.item.amount = data.previousAmount - space
-		inventory.set(item, itemIndex)
-		Inventories.getInventoryByID(data.id).set(data.item, data.itemIndex)
+		# warning-ignore:return_value_discarded
+		inventory.setItem(item, itemIndex)
+		# warning-ignore:return_value_discarded
+		Inventories.getInventoryByID(data.id).setItem(data.item, data.itemIndex)
 	# Check if the Source Stack was Split
 	elif data.has("split"):
 		# Check if the Item is not null
@@ -128,7 +131,8 @@ func drop_data(_position, data) -> void:
 		# To avoid merging different Types of Objects with each other
 		if item != null:
 			data.item.amount = data.previousAmount
-			Inventories.getInventoryByID(data.id).set(data.item, data.itemIndex)
+			# warning-ignore:return_value_discarded
+			Inventories.getInventoryByID(data.id).setItem(data.item, data.itemIndex)
 		# Check if the Target Slot is empty, add the split Stack to it
 		else:
 			# Add one if the Number of the full Stack was uneven
@@ -136,14 +140,18 @@ func drop_data(_position, data) -> void:
 			# Duplicate the Item in Order for it not to share the same value
 			# With the Source Stack
 			if data.previousAmount % 2 != 0:
-				Inventories.getInventoryByID(data.id).set(data.item.duplicate(), data.itemIndex)
+				# warning-ignore:return_value_discarded
+				Inventories.getInventoryByID(data.id).setItem(data.item.duplicate(), data.itemIndex)
 				data.item.amount += 1
-			inventory.set(data.item, itemIndex)
+			# warning-ignore:return_value_discarded
+			inventory.setItem(data.item, itemIndex)
 	# For simply swapping Items
 	else:
 		inventory.swap(data.id, inventory.id, data.itemIndex, itemIndex)
-		Inventories.getInventoryByID(data.id).set(item, data.itemIndex)
-		inventory.set(data.item.duplicate(), itemIndex)
+		# warning-ignore:return_value_discarded
+		Inventories.getInventoryByID(data.id).setItem(item, data.itemIndex)
+		# warning-ignore:return_value_discarded
+		inventory.setItem(data.item.duplicate(), itemIndex)
 	# Notify specific Objects that an Item has been dropped
 	# so they can continue working
 	if tmpInventory != null:
@@ -156,7 +164,7 @@ func drop_data(_position, data) -> void:
 func select() -> void:
 	# Mark the Slot as selected
 	selected.show()
-	# If the Slot contains an Item, set it on the Player
+	# If the Slot contains an Item, setItem it on the Player
 	if inventory.items[get_index()] != null:
 		player.playerItem = inventory.items[get_index()]
 	else:

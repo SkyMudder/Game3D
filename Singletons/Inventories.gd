@@ -5,21 +5,21 @@ signal resume
 
 const Inventory = preload("res://Inventory/Inventory.gd")
 
-onready var currentInventory : int = 0
-var currentFurnace : int = 0
-var itemID : int = -1
+onready var currentInventory: int = 0
+var currentFurnace: int = 0
+var itemID: int = -1
 
-var moving : = false
-var open : = false
-var unhandledData : Dictionary = {}
+var moving: bool = false
+var open: bool = false
+var unhandledData: Dictionary = {}
 
-var playerInventory : Inventory = Inventory.new(0, 24, 6)
-var toolbar : Inventory = Inventory.new(1, 10, 10)
+var playerInventory: Inventory = Inventory.new(0, 24, 6)
+var toolbar: Inventory = Inventory.new(1, 10, 10)
 
-onready var playerInventories : Array = []
-onready var furnaceInventories : Array = []
+onready var playerInventories: Array = []
+onready var furnaceInventories: Array = []
 
-func _ready():
+func _ready() -> void:
 	playerInventories.push_back(playerInventory)
 	currentInventory += 1
 	playerInventories.push_back(toolbar)
@@ -33,14 +33,14 @@ func newFurnaceInventory() -> int:
 	currentFurnace += 2
 	return currentFurnace - 2
 	
-func removeFurnaceInventory(inventoryID) -> void:
+func removeFurnaceInventory(inventoryID: int) -> void:
 	furnaceInventories.erase(getInventoryByID(inventoryID))
 	furnaceInventories.erase(getInventoryByID(inventoryID + 1))
 	currentInventory -= 2
 	currentFurnace -= 2
 	
-func getInventoryByID(inventoryID) -> Inventory:
-	var inventory = getPlayerInventoryByID(inventoryID)
+func getInventoryByID(inventoryID: int) -> Inventory:
+	var inventory: Inventory = getPlayerInventoryByID(inventoryID)
 	if inventory != null:
 		return inventory
 	inventory = getFurnaceInventoryByID(inventoryID)
@@ -48,13 +48,13 @@ func getInventoryByID(inventoryID) -> Inventory:
 		return inventory
 	return null
 	
-func getPlayerInventoryByID(inventoryID) -> Inventory:
+func getPlayerInventoryByID(inventoryID: int) -> Inventory:
 	for x in playerInventories:
 		if x.id == inventoryID:
 			return x
 	return null
 	
-func getFurnaceInventoryByID(inventoryID) -> Inventory:
+func getFurnaceInventoryByID(inventoryID: int) -> Inventory:
 	for x in furnaceInventories:
 		if x.id == inventoryID:
 			return x
@@ -73,6 +73,6 @@ func setUnhandledData(inventory, item, amount, index) -> void:
 	unhandledData.amount = amount
 	unhandledData.index = index
 	
-func getItemID():
+func getItemID() -> int:
 	itemID += 1
 	return itemID

@@ -3,29 +3,29 @@ extends StaticBody
 
 signal ready_to_remove
 
-onready var collision = get_node("CollisionShape")
-onready var ui = get_node("FurnaceView")
-onready var fuelProgress = get_node("FurnaceView/FurnaceHBoxContainer/InventoryVBoxContainer/FuelHBoxContainer/Fuel")
+onready var collision: CollisionShape = get_node("CollisionShape")
+onready var ui: GridContainer = get_node("FurnaceView")
+onready var fuelProgress: ProgressBar = get_node("FurnaceView/FurnaceHBoxContainer/InventoryVBoxContainer/FuelHBoxContainer/Fuel")
 
-var queue : = []
-var productItems : Array
+var queue: Array = []
+var productItems: Array
 
-var previousCollisionShape : CylinderShape
-var previousHurtboxShape : BoxShape
+var previousCollisionShape: CylinderShape
+var previousHurtboxShape: BoxShape
 
-var currentlyBurning : = false
-var currentlySmelting : = false
-var queuedForRemoval : = false
-var fuel : int = 0
+var currentlyBurning: bool = false
+var currentlySmelting: bool = false
+var queuedForRemoval: bool = false
+var fuel: int = 0
 
-const burnDuration : = 1
-const smeltDuration : = 4
+const burnDuration: int = 1
+const smeltDuration: int = 4
 
 """Deactivate _process, meaning Burning or Smelting
 Connect the Signal for updating the Queue
 Make the Furnace ready for Blueprinting
 Meaning Collisions and UI are deactivated"""
-func _ready():
+func _ready() -> void:
 	set_process(false)
 	ui.hide()
 	ui.connect("queue_updated", self, "_on_queue_updated")
@@ -35,7 +35,7 @@ func _ready():
 	#furnace.texture = furnaceNotPlaceable
 	
 """Runs while there are Items in the Queue"""
-func _process(_delta):
+func _process(_delta) -> void:
 	if queue.size() > 0 and !queuedForRemoval:
 		if readyToBurn():
 			burn()
@@ -50,7 +50,7 @@ func _process(_delta):
 		set_process(false)
 	
 """Set the Material using a Blueprint State"""
-func setBlueprintState(state) -> void:
+func setBlueprintState(state: int) -> void:
 	if state == 0:
 		for x in get_children():
 			if x is MeshInstance:
@@ -61,7 +61,7 @@ func setBlueprintState(state) -> void:
 				x.material_override = load("res://Assets/BluePrint.tres")
 	
 """Set the Materials using a Furnace State"""
-func setState(state) -> void:
+func setState(state: int) -> void:
 	if state == 0:
 		pass
 	elif state == 1:
@@ -70,7 +70,7 @@ func setState(state) -> void:
 		pass
 	
 """Toggle Collision"""
-func setCollision(state) -> void:
+func setCollision(state: int) -> void:
 	if state == 0:
 		collision.shape = null
 		$Hurtbox/CollisionShape.shape = null
@@ -81,8 +81,8 @@ func setCollision(state) -> void:
 """Burn a Stack until the Fuel has reached its max Value
 Or until the Stack has no Items"""
 func burn() -> void:
-	var sourceItems = ui.sourceInventory.items
-	var index = findBurnable()	# First Slot with a burnable Item
+	var sourceItems: Array = ui.sourceInventory.items
+	var index: int = findBurnable()	# First Slot with a burnable Item
 	if index != null:	# Only burn if an Item was found
 		currentlyBurning = true
 		# Only burn if there is enough Space for Fuel
@@ -116,13 +116,13 @@ Also does multiple Checks to guarantee that an Item like Wood
 Does not have its value incremented when put in the Product Inventory
 """
 func smelt() -> void:
-	var sourceItems = ui.sourceInventory.items
-	var targetItems = ui.productInventory.items
-	var index = findSmeltable()
+	var sourceItems: Array = ui.sourceInventory.items
+	var targetItems: Array= ui.productInventory.items
+	var index: int = findSmeltable()
 	# Check if there is enough Fuel and a smeltable Item was found
 	if index != null:
 		# Get the Source Item and determine what the Product is
-		var item = getProductFromSource(sourceItems[index]).duplicate()
+		var item: Item = getProductFromSource(sourceItems[index]).duplicate()
 		currentlySmelting = true
 		# Wait a specific Amount of Time to simulate the Furnace smelting
 		yield(get_tree().create_timer(smeltDuration), "timeout")
@@ -145,7 +145,7 @@ func smelt() -> void:
 		if queuedForRemoval:
 			emit_signal("ready_to_remove")
 	
-func smeltUpdateValues(sourceItem, index, targetItem, item) -> void:
+func smeltUpdateValues(sourceItem: Item, index: int, targetItem: Item, item: Item) -> void:
 	# Remove the smelted Item and the Fuel
 	sourceItem.amount -= 1
 	fuel -= 20
@@ -179,7 +179,7 @@ func findSmeltable():
 	
 """Checks if a specific Item is Burnable
 Returns a Boolean"""
-func checkBurnable(item) -> bool:
+func checkBurnable(item: Item) -> bool:
 	if item != null:
 		if item.burnable:
 			return true
@@ -187,7 +187,7 @@ func checkBurnable(item) -> bool:
 	
 """Checks if a specific Item is Smeltable
 Returns a Boolean"""
-func checkSmeltable(item) -> bool:
+func checkSmeltable(item: Item) -> bool:
 	if item != null:
 		if item.smeltable:
 			return true
@@ -205,12 +205,12 @@ func readyToSmelt() -> bool:
 		return true
 	return false
 	
-func getProductFromSource(item) -> Item:
+func getProductFromSource(item: Item) -> Item:
 	return item.smeltingProduct
 	
 """Gets the Items that are in the Furnace Inventories
 And returns them to the Player Inventory"""
-func getFurnaceItems(inventory) -> void:
+func getFurnaceItems(inventory: Inventory) -> void:
 	for x in range(inventory.size):
 		if inventory.items[x] != null:
 			Inventories.playerInventory.add(inventory.items[x])
@@ -218,7 +218,7 @@ func getFurnaceItems(inventory) -> void:
 """Checks if the Furnace can continue to process anything
 If not, sets process to false"""
 func ableToContinue() -> bool:
-	var checks = [false, false]
+	var checks : Array = [false, false]
 	if (findSmeltable() != null or (findBurnable() != null and fuel != 100)) and (findBurnable() != null or fuel > 0):
 		checks[0] = true
 	if productItems[0] != null:
@@ -237,7 +237,7 @@ func ableToContinue() -> bool:
 """This gets called when Items enter or leave the Furnace
 They are added or removed from the Queue accordingly
 Starts the Process when something entered the Queue"""
-func _on_queue_updated(itemIndex, flag):
+func _on_queue_updated(itemIndex: int, flag: int) -> void:
 	if flag == 0:
 		if !itemIndex in queue:
 			queue.push_back(itemIndex)
@@ -247,14 +247,14 @@ func _on_queue_updated(itemIndex, flag):
 	
 """For closing the Furnace Inventory when opening the Main Inventory
 Or right Clicking anywhere"""
-func _input(_event):
+func _input(_event) -> void:
 	if Input.is_action_just_pressed("ui_focus_next") or Input.is_action_just_pressed("mouse_right") or Input.is_action_just_pressed("ui_cancel"):
 		ui.hide()
 		States.inventoryOpen = false
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	
 """Handles the Furnace Input"""
-func handleUI():
+func handleUI() -> void:
 	# Toggle the Furnace UI Visibility
 	if Input.is_action_just_pressed("interact"):
 		if ui.visible:
@@ -282,7 +282,7 @@ func handleUI():
 			States.inventoryOpen = false
 	
 # Destroy the Furnace
-func _on_ready_to_remove():
+func _on_ready_to_remove() -> void:
 	if !currentlyBurning and !currentlySmelting:
 		Inventories.removeFurnaceInventory(ui.sourceInventory.id)
 		queue_free()

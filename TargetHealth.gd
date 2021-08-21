@@ -3,7 +3,7 @@ extends ProgressBar
 
 var timer : Timer
 
-func _ready():
+func _ready() -> void:
 	timer = Timer.new()
 	add_child(timer)
 	# warning-ignore:return_value_discarded

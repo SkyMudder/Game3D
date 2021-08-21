@@ -1,15 +1,15 @@
 extends "res://Assets/FarmableObjects.gd"
 
 
-var timer : Timer
-var hp : int = 1000
-var level : int = 0
-var recentlyDamaged = false
-var damageType = Types.resourceType.WOOD
-var resource : Resource = preload("res://Items/Wood.tres")
-var amount : int = 6
-var material = preload("res://Assets/Log2.material")
-var effectOffset = Vector3(-0.5, 0.5, 0.7)
+var timer: Timer
+var hp: int = 1000
+var level: int = 0
+var recentlyDamaged: bool = false
+var damageType: int = Types.resourceType.WOOD
+var resource: Resource = preload("res://Items/Wood.tres")
+var amount: int = 6
+var material: SpatialMaterial = preload("res://Assets/Log2.material")
+var effectOffset: Vector3 = Vector3(-0.5, 0.5, 0.7)
 
 func _ready():
 	timer = Timer.new()

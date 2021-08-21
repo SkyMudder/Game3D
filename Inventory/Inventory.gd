@@ -4,28 +4,28 @@ class_name Inventory
 
 signal items_changed(inventoryChanged, index)
 
-var items : Array = []
+var items: Array = []
 	
-var playerInventories : Array
-var remoteInventories : Array
+var playerInventories: Array
+var remoteInventories: Array
 	
-var id : int
-var size : int
-var columns : int
+var id: int
+var size: int
+var columns: int
 	
-var scheduledRemovalInventories : Array = []
-var scheduledRemovalIndexes : Array = []
-var scheduledRemovalAmounts : Array = []
+var scheduledRemovalInventories: Array = []
+var scheduledRemovalIndexes: Array = []
+var scheduledRemovalAmounts: Array = []
 	
-func _init(inventoryId, inventorySize, inventoryColumns):
+func _init(inventoryId: int, inventorySize: int, inventoryColumns: int):
 	id = inventoryId
 	size = inventorySize
 	columns = inventoryColumns
 	
 """Automatically determines where to add an Item to the Inventory/Toolbar
 Splits Stacks automatically"""
-func add(item) -> void:
-	var x = playerInventories.size() - 1
+func add(item: Item) -> void:
+	var x: int = playerInventories.size() - 1
 	while x >= 0 and item.amount > 0:
 		var y = 0
 		while y <= playerInventories[x].items.size() - 1 and item.amount > 0:
@@ -40,7 +40,7 @@ func add(item) -> void:
 		x -= 1
 	x = playerInventories.size() - 1
 	while x >= 0:
-		var y = 0
+		var y: int = 0
 		while y <= playerInventories[x].items.size() - 1 and item.amount > 0:
 			if playerInventories[x].items[y] == null:
 				if item.amount <= item.stackLimit:
@@ -61,12 +61,12 @@ with the respective Amount that might be removed in another Array
 Also saves the Inventory from which it was removed in an Array
 Items do not directly get removed in this Method
 Returns True if enough Items have been found, False if not"""
-func seek(item, amount) -> bool:
-	var amountTaken = 0
-	var need = amount - amountTaken
-	var x = playerInventories.size() - 1
+func seek(item: Item, amount: int) -> bool:
+	var amountTaken : int = 0
+	var need: int = amount - amountTaken
+	var x: int = playerInventories.size() - 1
 	while x >= 0:
-		var y = playerInventories[x].items.size() - 1
+		var y: int = playerInventories[x].items.size() - 1
 		while y >= 0:
 			if playerInventories[x].items[y] != null and need:
 				if playerInventories[x].items[y].name == item.name:
@@ -88,19 +88,19 @@ func seek(item, amount) -> bool:
 		x -= 1
 	return false
 
-func set(item, itemIndex):
+func setItem(item: Item, itemIndex: int) -> Item:
 	var previousItem = items[itemIndex]
 	items[itemIndex] = item
 	emit_signal("items_changed", id, itemIndex)
 	return previousItem
 	
-func swap(sourceInventory, targetInventory, itemIndex, targetItemIndex) -> void:
-	var tmp = Inventories.getInventoryByID(targetInventory).items[targetItemIndex]
+func swap(sourceInventory: int, targetInventory: int, itemIndex: int, targetItemIndex: int) -> void:
+	var tmp: Item = Inventories.getInventoryByID(targetInventory).items[targetItemIndex]
 	Inventories.getInventoryByID(targetInventory).items[targetItemIndex] = Inventories.getInventoryByID(sourceInventory).items[itemIndex]
 	Inventories.getInventoryByID(sourceInventory).items[itemIndex] = tmp
 	
-func remove(itemIndex):
-	var previousItem = items[itemIndex]
+func remove(itemIndex: int) -> Item:
+	var previousItem: Item= items[itemIndex]
 	items[itemIndex] = null
 	emit_signal("items_changed", id, itemIndex)
 	return previousItem
@@ -116,19 +116,19 @@ func removeScheduled() -> void:
 	scheduledRemovalIndexes.clear()
 	scheduledRemovalAmounts.clear()
 	
-func setInventorySize(inventorySize) -> void:
+func setInventorySize(inventorySize: int) -> void:
 	for _x in range(inventorySize):
 		items.push_back(null)
 	
 """If the Stack that gets added is too big,
 It splits up the Rest on the next Stack"""
-func splitAdd(item, inventoryIndex, itemsIndex) -> void:
-	var space = item.stackLimit - playerInventories[inventoryIndex].items[itemsIndex].amount
+func splitAdd(item: Item, inventoryIndex: int, itemsIndex: int) -> void:
+	var space: int = item.stackLimit - playerInventories[inventoryIndex].items[itemsIndex].amount
 	playerInventories[inventoryIndex].items[itemsIndex].amount += space
 	item.amount -= space
 	playerInventories[inventoryIndex].emit_signal("items_changed", playerInventories[inventoryIndex].id, itemsIndex)
 	
 """Creates a new Item, meaning it duplicates the given one"""
-func addNewItem(item, inventoryIndex, itemsIndex) -> void:
-	playerInventories[inventoryIndex].set(item.duplicate(), itemsIndex)
+func addNewItem(item: Item, inventoryIndex: int, itemsIndex: int) -> void:
+	playerInventories[inventoryIndex].setItem(item.duplicate(), itemsIndex)
 	playerInventories[inventoryIndex].items[itemsIndex].amount = 0
