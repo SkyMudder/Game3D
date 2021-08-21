@@ -8,10 +8,6 @@ onready var ui: GridContainer = get_node("FurnaceView")
 onready var fuelProgress: ProgressBar = get_node("FurnaceView/FurnaceHBoxContainer/InventoryVBoxContainer/FuelHBoxContainer/Fuel")
 var queue: Array = []
 var productItems: Array
-
-var previousCollisionShape: CylinderShape
-var previousHurtboxShape: BoxShape
-
 var currentlyBurning: bool = false
 var currentlySmelting: bool = false
 var queuedForRemoval: bool = false
@@ -30,8 +26,7 @@ func _ready() -> void:
 	# warning-ignore:return_value_discarded
 	ui.connect("queue_updated", self, "_on_queue_updated")
 	productItems = ui.productInventory.items
-	previousCollisionShape = collision.shape
-	previousHurtboxShape = $Hurtbox/CollisionShape.shape
+	setCollision(0)
 	#furnace.texture = furnaceNotPlaceable
 	
 """Runs while there are Items in the Queue"""
@@ -72,11 +67,11 @@ func setState(state: int) -> void:
 """Toggle Collision"""
 func setCollision(state: int) -> void:
 	if state == 0:
-		collision.shape = null
-		$Hurtbox/CollisionShape.shape = null
+		$CollisionShape.disabled = true
+		$Hurtbox/CollisionShape.disabled = true
 	if state == 1:
-		collision.shape = previousCollisionShape
-		$Hurtbox/CollisionShape.shape = previousHurtboxShape
+		$CollisionShape.disabled = false
+		$Hurtbox/CollisionShape.disabled = false
 	
 """Burn a Stack until the Fuel has reached its max Value
 Or until the Stack has no Items"""

@@ -1,14 +1,15 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://Assets/FurnaceContainer_001.material" type="Material" id=1]
 [ext_resource path="res://Assets/FurnaceCoal_001.material" type="Material" id=2]
-[ext_resource path="res://Assets/Lenga_001.material" type="Material" id=3]
+[ext_resource path="res://Assets/WoodDark.material" type="Material" id=3]
 [ext_resource path="res://Inventory/FurnaceView.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Assets/Furnace_001.material" type="Material" id=5]
 [ext_resource path="res://Assets/Darkness_001.material" type="Material" id=6]
 [ext_resource path="res://Assets/Furnace.gd" type="Script" id=7]
 [ext_resource path="res://HitHurtBoxes/Hurtbox.tscn" type="PackedScene" id=8]
 [ext_resource path="res://HitHurtBoxes/Hurtbox.gd" type="Script" id=9]
+[ext_resource path="res://Assets/Iron.material" type="Material" id=10]
 
 [sub_resource type="ArrayMesh" id=1]
 resource_name = "Cylinder.005"
@@ -99,7 +100,7 @@ surfaces/0 = {
 "blend_shape_data": [  ],
 "format": 97559,
 "index_count": 1164,
-"material": ExtResource( 5 ),
+"material": ExtResource( 10 ),
 "name": "Mettalic.001",
 "primitive": 4,
 "skeleton_aabb": [  ],
