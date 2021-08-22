@@ -10,13 +10,13 @@ var shouldRemove: bool = false
 var rng: RandomNumberGenerator
 var noiseObj: OpenSimplexNoise
 
-var Rock: PackedScene = preload("res://Assets/RockLarge.tscn")
-var TreeOak: PackedScene = preload("res://Assets/TreeOak.tscn")
-var TreeFir: PackedScene = preload("res://Assets/TreeFir.tscn")
-var Grass: PackedScene = preload("res://Assets/Grass.tscn")
-var RawIronRock: PackedScene = preload("res://Assets/IronRock.tscn")
-var RawCoalRock: PackedScene = preload("res://Assets/CoalRock.tscn")
-var RockSmall: PackedScene = preload("res://Assets/RockSmall.tscn")
+var Rock: PackedScene = preload("res://Objects/RockLarge.tscn")
+var TreeOak: PackedScene = preload("res://Objects/TreeOak.tscn")
+var TreeFir: PackedScene = preload("res://Objects/TreeFir.tscn")
+var Grass: PackedScene = preload("res://Objects/Grass.tscn")
+var RawIronRock: PackedScene = preload("res://Objects/IronRock.tscn")
+var RawCoalRock: PackedScene = preload("res://Objects/CoalRock.tscn")
+var RockSmall: PackedScene = preload("res://Objects/RockSmall.tscn")
 
 func _init(terrainNoise: OpenSimplexNoise, objectNoise: OpenSimplexNoise, chunkX: int, chunkZ: int, chunkSize: int) -> void:
 	self.noise = terrainNoise

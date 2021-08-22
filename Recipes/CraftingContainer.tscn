@@ -5,7 +5,7 @@
 [node name="CraftingContainer" type="HBoxContainer"]
 anchor_bottom = 0.151852
 margin_right = 1920.0
-margin_bottom = 136.0
+margin_bottom = 378.889
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false

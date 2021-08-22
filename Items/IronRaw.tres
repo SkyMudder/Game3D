@@ -1,0 +1,20 @@
+[gd_resource type="Resource" load_steps=4 format=2]
+
+[ext_resource path="res://Items/Item.gd" type="Script" id=1]
+[ext_resource path="res://Assets/IronRaw.png" type="Texture" id=2]
+[ext_resource path="res://Items/IronIngot.tres" type="Resource" id=3]
+
+[resource]
+script = ExtResource( 1 )
+name = "Raw Iron"
+texture = ExtResource( 2 )
+amount = 1
+stackLimit = 50
+damageMultiplier = 0.0
+damageType = -1
+level = 0
+model = ""
+burningSpeed = 0.0
+smeltingSpeed = 1.0
+buildable = false
+smeltingProduct = ExtResource( 3 )

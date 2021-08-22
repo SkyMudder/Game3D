@@ -1,7 +1,7 @@
 [gd_resource type="Resource" load_steps=3 format=2]
 
 [ext_resource path="res://Items/Item.gd" type="Script" id=1]
-[ext_resource path="res://Items/OreFurnaceIcon.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Furnace.png" type="Texture" id=2]
 
 [resource]
 script = ExtResource( 1 )
@@ -12,7 +12,7 @@ stackLimit = 1
 damageMultiplier = 0.0
 damageType = -1
 level = -1
-model = "res://Assets/OreFurnace.tscn"
+model = "res://Objects/Furnace.tscn"
 burningSpeed = 0.0
 smeltingSpeed = 0.0
 buildable = true

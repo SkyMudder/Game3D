@@ -1,0 +1,18 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://Items/Item.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Coal.png" type="Texture" id=2]
+
+[resource]
+script = ExtResource( 1 )
+name = "Coal"
+texture = ExtResource( 2 )
+amount = 1
+stackLimit = 50
+damageMultiplier = 0.0
+damageType = -1
+level = 0
+model = ""
+burningSpeed = 2.0
+smeltingSpeed = 0.0
+buildable = false
